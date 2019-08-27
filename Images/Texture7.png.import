@@ -2,35 +2,33 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Texture7.png-10bde817bcc37c74571e7be8564784cd.s3tc.stex"
-path.etc="res://.import/Texture7.png-10bde817bcc37c74571e7be8564784cd.etc.stex"
+path="res://.import/Texture7.png-10bde817bcc37c74571e7be8564784cd.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Images/Texture7.png"
-dest_files=[ "res://.import/Texture7.png-10bde817bcc37c74571e7be8564784cd.s3tc.stex", "res://.import/Texture7.png-10bde817bcc37c74571e7be8564784cd.etc.stex" ]
+dest_files=[ "res://.import/Texture7.png-10bde817bcc37c74571e7be8564784cd.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=true
 flags/filter=true
-flags/mipmaps=true
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=1
 process/fix_alpha_border=true
-process/premult_alpha=false
+process/premult_alpha=true
 process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0

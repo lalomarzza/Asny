@@ -47,15 +47,19 @@ var Posi
 var RotY = 0
 var Rott
 var VelR = 5
-onready var StoreP = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/Camera/StoreAsny/")
+onready var StoreP = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/StoreAsny/")
 var Rtto
+var NewScore = false
+var RX = 0
+var DN = -90
+onready var W = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/")
 
 onready var CameraI = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/Camera")
 
 const StoreItems = "user://Store.dat"
 const passwordSt = "4321"
 var is_loadedSt = false
-var Store = {"Res" : 0, "HatB" : 0, "Hat" : true}
+var Store = {"Res" : 0, "HatB" : 0, "Hat" : true, "TH" : false, "TR" : true}
 
 func Reload():
 	Store["Res"] = 0
@@ -63,12 +67,17 @@ func Reload():
 	Store["Hat"] = true
 	save_store()
 
+func ReloadS():
+	Store["TH"] = false
+	save_store()
+
 func _ready():
-	CameraI.set_interpolation_enabled(true)
+#	CameraI.set_interpolation_enabled(true)
+#	Base.CameraI.set_target_path(str(Base.W,"/Spatial/"))
 	_input(false)
 	_ChangeF()
 	_Store()
-	AsnyPress = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/Camera/StoreAsny/Asny!ExportD/")
+	AsnyPress = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/StoreAsny/Asny!ExportD/")
 #	OS.set_icon(load("res://examples/test_reference.png"))
 	if get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/Control1/Button").connect("pressed",self,"_readyPlayer"):
 		_readyPlayer()
@@ -78,7 +87,7 @@ func _ready():
 	SvSt()
 	print(Store)
 #	Res = int(Base.data["Rest"])
-#	Reload()
+#	ReloadS()
 
 func Sv():
 	var file = File.new()
@@ -100,8 +109,8 @@ func _ChangeF():
 	PsPlyRt = str("/root/Ctrl/VBox/VpCtrl/Vport/World/F/AsnyControl/Control")
 
 func _process(delta):
-	if Input.is_action_just_pressed("ui_up"):
-		get_node("Cancel").free()
+	if Input.is_action_just_pressed("ui_accept"):
+		_readyPlayer()
 	if press == false:
 		pass
 	if press == true:
@@ -111,6 +120,12 @@ func _process(delta):
 		ContF1 -= VelZ*delta
 		if f.get_rotation_degrees().x <= ContF:
 			ContF -= 1
+			if ContF == DN:
+				DN -= 90
+				if DN <= -360:
+					DN = 0
+					RX = 0
+				print(DN)
 			f.get_parent()._Spawn()
 		f.set_rotation_degrees(Vector3(ContF1,0,0))
 
@@ -148,6 +163,8 @@ func load_store():
 	file.close()
 	is_loadedSt = true
 
+var Cong = 0
+
 func _CoinC():
 	ContC += 1
 	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/Coins").set_text(str(ContC))
@@ -157,17 +174,23 @@ func _CoinC():
 	if ContC >= int(data["Score"]):
 		data["Score"] = ContC
 		save_data()
+		Cong += 1
+		if Cong == 2:
+			get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/CPUParticles2D").set_emitting(true)
 
 func _CoinD():
 	ContC += 1
 	data["Diamond"] += 1
 	save_data()
 	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/Diamond").set_text(str(data["Diamond"]))
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/TimerDiamond").start()
 
 func _rot():
 	Base.target.set_rotation(Vect)
 
 func _readyPlayer():
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/TimerDiamond").start()
+	Cong = 0
 	if Bas == "F":
 		VelG = .05
 		VelZ = 9
@@ -209,6 +232,7 @@ func _VR():
 	CameraI.set_rotation(Vector3(0,0,90))
 
 func _readyPlayerVR():
+	Cong = 0
 	if Bas == "F":
 		VelG = .005
 	if Bas == "R":

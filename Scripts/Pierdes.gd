@@ -25,4 +25,3 @@ func _quit():
 	get_parent().free()
 	Base.AsnyPress.get_parent().remove_child(Base.AsnyPress)
 	Base.StoreP.add_child(Base.AsnyPress)
-#	Base.AsnyPress.set_translation(Vector3(0,50,0))

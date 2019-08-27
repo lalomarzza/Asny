@@ -15,21 +15,16 @@ func _on_SwipeDetector_swipe_ended(gesture):
 				Base.PosAsny = 0.1
 			Base.Vect = Vector3(0,0,Base.PosAsny)
 			Base.targetAsny2.get_node("AnimationPlayer").play("Derecha")
+			Base._rot()
 		if Base.Bas == "R":
 			Base.Vect = Vector3(0,0,Base.PosAsny)
 			Base.targetAsny2.get_node("AnimationPlayer").play("Derecha")
+			Base._rot()
 		if Base.Bas == "H":
 			Base.Vect = Vector3(0,Base.PosAsny,0)
+			Base._rot()
 		if Base.Bas == "W":
-			Base.RotY = Base.Rott.get_rotation_degrees().y - 22.5
-			print(RotY)
-			Base.Rott.set_rotation_degrees(Base.Rtto.get_rotation_degrees()+Vector3(0,Base.RotY,0))
-			Base.Rtto.set_rotation_degrees(Vector3(0,0,0))
-#			Base.Rott.set_rotation_degrees(Vector3(Base.Rott.get_rotation_degrees().x,RotY,Base.Rott.get_rotation_degrees().z))
-#			Base.Vect = Vector3(0,0,Base.RotY)
-#			Base.target.get_parent().set_rotation_degrees(Base.Vect)
-#			Base.Vect = Vector3(0,0,Base.PosAsny)
-#			Base.target.set_rotation(Base.Vect)
+			Base.Rtto.rotate(Vector3(0,1,0),deg2rad(11.25))
 	if gesture.get_direction()=="right"||gesture.get_direction()=="up_right"||gesture.get_direction()=="down_right":
 		Base.Ult = Base.PosAsny
 		Base.PosAsny = Base.PosAsny - Base.VelG
@@ -38,19 +33,51 @@ func _on_SwipeDetector_swipe_ended(gesture):
 				Base.PosAsny = -0.1
 			Base.Vect = Vector3(0,0,Base.PosAsny)
 			Base.targetAsny2.get_node("AnimationPlayer").play("Izquierda")
+			Base._rot()
 		if Base.Bas == "R":
 			Base.targetAsny2.get_node("AnimationPlayer").play("Izquierda")
 			Base.Vect = Vector3(0,0,Base.PosAsny)
+			Base._rot()
 		if Base.Bas == "H":
 			Base.Vect = Vector3(0,Base.PosAsny,0)
+			Base._rot()
 		if Base.Bas == "W":
-			Base.RotY = Base.Rott.get_rotation_degrees().y + 22.5
-			Base.Rott.set_rotation_degrees(Base.Rtto.get_rotation_degrees()+Vector3(0,Base.RotY,0))
-			Base.Rtto.set_rotation_degrees(Vector3(0,0,0))
-#			print(Base.Rott.get_rotation().x)
-#			Base.Rott.set_rotation_degrees(Vector3(Base.Rott.get_rotation_degrees().x,RotY,Base.Rott.get_rotation_degrees().z))
-#			Base.Vect = Vector3(0,0,Base.RotY)
-#			Base.target.get_parent().set_rotation_degrees(Base.Vect)
-#			Base.Vect = Vector3(0,0,Base.PosAsny)
-#			Base.target.set_rotation(Base.Vect)
-	Base._rot()
+			Base.Rtto.rotate(Vector3(0,-1,0),deg2rad(11.25))
+
+func _input(event):
+	if Input.is_action_just_pressed("ui_left"):
+		Base.Ult = Base.PosAsny
+		Base.PosAsny = Base.PosAsny + Base.VelG
+		if Base.Bas == "F":
+			if Base.PosAsny >= 0.1:
+				Base.PosAsny = 0.1
+			Base.Vect = Vector3(0,0,Base.PosAsny)
+			Base.targetAsny2.get_node("AnimationPlayer").play("Derecha")
+			Base._rot()
+		if Base.Bas == "R":
+			Base.Vect = Vector3(0,0,Base.PosAsny)
+			Base.targetAsny2.get_node("AnimationPlayer").play("Derecha")
+			Base._rot()
+		if Base.Bas == "H":
+			Base.Vect = Vector3(0,Base.PosAsny,0)
+			Base._rot()
+		if Base.Bas == "W":
+			Base.Rott.rotate(Vector3(0,1,0),deg2rad(11.25))
+	if Input.is_action_just_pressed("ui_right"):
+		Base.Ult = Base.PosAsny
+		Base.PosAsny = Base.PosAsny - Base.VelG
+		if Base.Bas == "F":
+			if Base.PosAsny <= -0.1:
+				Base.PosAsny = -0.1
+			Base.Vect = Vector3(0,0,Base.PosAsny)
+			Base.targetAsny2.get_node("AnimationPlayer").play("Izquierda")
+			Base._rot()
+		if Base.Bas == "R":
+			Base.targetAsny2.get_node("AnimationPlayer").play("Izquierda")
+			Base.Vect = Vector3(0,0,Base.PosAsny)
+			Base._rot()
+		if Base.Bas == "H":
+			Base.Vect = Vector3(0,Base.PosAsny,0)
+			Base._rot()
+		if Base.Bas == "W":
+			Base.Rott.rotate(Vector3(0,-1,0),deg2rad(11.25))

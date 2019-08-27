@@ -19,8 +19,8 @@ var M2 = preload("res://Scenes/ObjectSingle/MntI.scn")
 
 var CD = preload("res://Scenes/ObjectSingle/CorkNClothD.scn")
 var CI = preload("res://Scenes/ObjectSingle/CorkNClothI.scn")
-var CR = [#preload("res://Scenes/ObjectSingle/Hose1.scn"),
-#preload("res://Scenes/ObjectSingle/Lasso.scn"),
+var CR = [preload("res://Scenes/ObjectSingle/Hose1.scn"),
+preload("res://Scenes/ObjectSingle/Lasso.scn"),
 preload("res://Scenes/ObjectSingle/RecuaNCork.scn")
 ]
 var CH = preload("res://Scenes/ObjectSingle/Hill1.scn")
@@ -77,11 +77,27 @@ var SpawnPlat
 var ContSpw = 181
 var ContSpawn = 4
 
+var s = 0
+var GR = 0
+var GGR = 10
+var RRot = 0
+var RRotY = 0
+
+var RS = 0
+var HS = 0
+var NS = 0
+var PS = 0
+
+var lasso
+
 func _ready():
 	randomize()
+	Base.RX = randi()%4
+	print(Base.RX)
+	Base.DN = -((Base.RX*90)+90)
+	print(Base.DN)
+	self.rotate(Vector3(1,0,0),rad2deg(Base.RX*90))
 	_Start()
-	rotate_x(.4)
-	
 
 func _Start():
 	RPosCntPw = randi()%20+15
@@ -103,24 +119,20 @@ func _Spawn():
 		get_node(str(S-179)).free()
 		ContSpw += 1
 		_SpawnS()
-var s = 0
-var GR = 0
-var GGR = 10
-var RRot = 0
-var RRotY = 0
+
 func _SpawnS():
 	S += 1
 	s += .2
 	SpawnFloor = Floor.instance()
 	SpawnFloor.set_name(str(S))
 	GR += 1
-#	RRot += RRotY
-	if GR >= GGR:
-#		RRotY = rand_range(-.1,.1)
-#		GGR += 10
-		if GR >= 360:
-			GR = 0
-			GGR = 0
+##	RRot += RRotY
+#	if GR >= GGR:
+##		RRotY = rand_range(-.1,.1)
+##		GGR += 10
+#		if GR >= 360:
+#			GR = 0
+#			GGR = 0
 	SpawnFloor.set_rotation_degrees(Vector3(-S,0,0))
 	add_child(SpawnFloor)
 	ContOnOb += 1
@@ -142,7 +154,10 @@ func _SpawnS():
 			if CkRndCn == 4:
 				ContR += 1
 				if ContR == 5:
-					var lasso = CR[randi()%CR.size()]
+					lasso = CR[randi()%1]
+					if Base.RX == 0:
+						lasso = CR[2]
+						print("Recua")
 					SpawnCk = lasso.instance()
 					ContR = 0
 					SpawnCk.set_translation(Vector3(0,ObH,0))
@@ -181,7 +196,10 @@ func _SpawnS():
 			if CkRndCn == 4:
 				ContR += 1
 				if ContR == 5:
-					var lasso = CR[randi()%CR.size()]
+					lasso = CR[randi()%1]
+					if Base.RX == 0:
+						lasso = CR[2]
+						print("Recua")
 					SpawnCk = lasso.instance()
 					SpawnCk.set_translation(Vector3(0,float(ObH),0))
 					Ck = get_node(str(S,"/L")).get_child(0).get_node("CorkI")
@@ -252,24 +270,27 @@ func _SpawnS():
 		ContSpawn += 360
 		n = 0
 		m = 0
+	NS = S
 	_new()
 
 var Obbs
 var CObs = 8
 
 func _new():
-	if CkRnd == 2:
-		Rng1 = 3
-		Rng2 = 5
-		CObs = 8
-	if CkRnd == 1:
-		Rng1 = 1
-		Rng2 = 3
-		CObs = 8
-	else:
-		Rng1 = 1
-		Rng2 = 5
-		CObs = 4
+	match S:
+		NS:
+			if CkRnd == 2:
+				Rng1 = 3
+				Rng2 = 5
+				CObs = 8
+			if CkRnd == 1:
+				Rng1 = 1
+				Rng2 = 3
+				CObs = 8
+			else:
+				Rng1 = 1
+				Rng2 = 5
+				CObs = 4
 	if BoolPw == 1:
 		if  ContOnPw <= RCantPw:
 			ContOnPw += 1

@@ -2,11 +2,12 @@ extends Spatial
 
 var ContF1 = 0
 
+var Vect = Vector3(-1,0,0)
+
 func _process(delta):
-	ContF1 = -20 * delta
-	Base.Rtto.set_rotation_degrees(Base.Rtto.get_rotation_degrees()+Vector3(ContF1,0,0))
-#	print($Base/.get_rotation_degrees())#+Vector3(ContF1,Base.RotY,$Base/.get_rotation_degrees().z))
-#	Base.Rott.set_rotation_degrees(Vector3(ContF1,Base.RotY,Base.Rott.get_rotation_degrees().z))
+	ContF1 = -0.5 * delta
+	Base.Rtto.set_rotation(Base.Rtto.get_rotation()+Vector3(ContF1,0,0))
+#	Base.Rtto.rotate(Vect,deg2rad(1.0))
 
 const ObW = [preload("res://Scenes/ObjectSingle/ObW.scn")]
 var ObWh
@@ -17,6 +18,7 @@ var R2 = 15
 var RT = 90
 var TW = -1.2
 var TH = 0
+
 func _ready():
 	Base.Rott = $Base/
 	Base.Rtto = $Base/Spatial
@@ -39,3 +41,21 @@ func _ready():
 		TW += .4
 		PosW = 0
 
+
+#
+#func _on_SwipeDetector_swipe_ended(gesture):
+#	if gesture.get_direction()=="left"||gesture.get_direction()=="up_left"||gesture.get_direction()=="down_left":
+##		Base.Rott.set_rotation_degrees(Base.Rtto.get_rotation_degrees())
+#		Base.Rott.rotate(Vector3(0,1,0),deg2rad(22.5))
+##		Vect = Vector3(-1,0,0)
+##		Base.RotY += 11.25
+##		Base.Rott.set_rotation_degrees(Base.Rtto.get_rotation_degrees())
+##		Base.Rtto.set_rotation(Vector3(0,0,0))
+#	if gesture.get_direction()=="right"||gesture.get_direction()=="up_right"||gesture.get_direction()=="down_right":
+##		Base.Rott.set_rotation_degrees(Base.Rtto.get_rotation_degrees())
+#		Base.Rott.rotate(Vector3(0,-1,0),deg2rad(22.5))
+##		Vect = Vector3(0,1,0)
+##		Base.RotY -= 11.25
+##		Base.Rott.set_rotation_degrees(Base.Rtto.get_rotation_degrees()+Vector3(Base.RotY,Base.RotY,0))
+##		print(Base.Rtto.get_rotation_degrees()+Vector3(0,Base.RotY,0))
+##		Base.Rtto.set_rotation(Vector3(0,0,0))
