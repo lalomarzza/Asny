@@ -10,12 +10,10 @@ var Strt = false
 
 func _ready():
 	Base.VRF = self
-
-func _start():
-	Strt = true
-
-func _stop():
-	Strt = false
+	print(OS.get_screen_orientation(),"S")
+	OS.set_screen_orientation(0)
+	print(OS.get_screen_orientation(),"S")
+#	OS.set_window_size(Vector2(1024,600))
 
 func _process(delta):
 	if Strt == true:
@@ -46,4 +44,6 @@ func _process(delta):
 				Vect = Vector3(0,Base.PosAsny,0)
 		Base.target.set_rotation(Vect)
 	else:
-		pass
+		if Input.get_accelerometer().x >= 2:
+			Strt = true
+			Base._readyPlayerVR()

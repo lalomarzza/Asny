@@ -11,6 +11,9 @@ var AsnyPressHat
 
 var Trans = false
 
+func _process(delta):
+	$Label.set_text(str(Input.get_accelerometer()))
+
 func _on_Music_pressed():
 	var Menu = get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/Control1/Music")
 	if Music == true:
@@ -113,6 +116,7 @@ func _Hat():
 func _on_Timer_timeout():
 	Base.Store["TH"] = true
 	Base.data["Diamond"] -= Price
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/Diamond").set_text(str(Base.data["Diamond"]))
 	Base.save_store()
 	Base.save_data()
 

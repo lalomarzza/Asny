@@ -155,9 +155,9 @@ func _SpawnS():
 				ContR += 1
 				if ContR == 5:
 					lasso = CR[randi()%1]
-					if Base.RX == 0:
-						lasso = CR[2]
-						print("Recua")
+#					if Base.RX == 0:
+#						lasso = CR[2]
+#						print("Recua")
 					SpawnCk = lasso.instance()
 					ContR = 0
 					SpawnCk.set_translation(Vector3(0,ObH,0))
@@ -197,9 +197,9 @@ func _SpawnS():
 				ContR += 1
 				if ContR == 5:
 					lasso = CR[randi()%1]
-					if Base.RX == 0:
-						lasso = CR[2]
-						print("Recua")
+#					if Base.RX == 0:
+#						lasso = CR[2]
+#						print("Recua")
 					SpawnCk = lasso.instance()
 					SpawnCk.set_translation(Vector3(0,float(ObH),0))
 					Ck = get_node(str(S,"/L")).get_child(0).get_node("CorkI")

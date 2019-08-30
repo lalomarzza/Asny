@@ -74,7 +74,6 @@ func ReloadS():
 func _ready():
 #	CameraI.set_interpolation_enabled(true)
 #	Base.CameraI.set_target_path(str(Base.W,"/Spatial/"))
-	_input(false)
 	_ChangeF()
 	_Store()
 	AsnyPress = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/StoreAsny/Asny!ExportD/")
@@ -82,7 +81,7 @@ func _ready():
 	if get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/Control1/Button").connect("pressed",self,"_readyPlayer"):
 		_readyPlayer()
 	if get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/Control1/Button4").connect("pressed",self,"_VR"):
-		_readyPlayerVR()
+		_VR()
 	Sv()
 	SvSt()
 	print(Store)
@@ -108,9 +107,20 @@ func SvSt():
 func _ChangeF():
 	PsPlyRt = str("/root/Ctrl/VBox/VpCtrl/Vport/World/F/AsnyControl/Control")
 
+var VRS = false
+
 func _process(delta):
+#	if VRS == true:
+#		if Input.get_accelerometer().x >= 1:
+#			_readyPlayerVR()
+#			VRF._start()
+#			VRS = false
 	if Input.is_action_just_pressed("ui_accept"):
-		_readyPlayer()
+		if Ctrl == "VR":
+			_readyPlayerVR()
+			VRF.Strt = true
+		else:
+			_readyPlayer()
 	if press == false:
 		pass
 	if press == true:
@@ -219,17 +229,11 @@ func _readyPlayer():
 
 var VRF
 
-func _input(event):
-	if Input.get_accelerometer().x <= -1:
-		_readyPlayerVR()
-		VRF._start()
-		_input(false)
-
 func _VR():
-	_input(true)
 	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/").hide()
 	_CtrlVR()
-	CameraI.set_rotation(Vector3(0,0,90))
+#	W.get_node("AsnyPlayer/Spatial").set_rotation_degrees(Vector3(0,-90,90))
+	
 
 func _readyPlayerVR():
 	Cong = 0
@@ -249,7 +253,7 @@ func _readyPlayerVR():
 	targetAsny = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/")
 	targetAsnyVR = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/VR")
 	targetAsny2 = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Asny!ExportD")
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/Camera/StoreAsny/CPUParticles").hide()
+#	get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/Camera/StoreAsny/CPUParticles").hide()
 	CameraI.VR()
 	if Bas == "R":
 		BasNode._reload()
