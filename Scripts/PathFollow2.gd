@@ -17,7 +17,7 @@ func _process(delta):
 	if Unit >= UnitC:
 		Base._ChangeF()
 		get_node(Base.PosPlF).get_rotation_degrees()
-		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/Camera/")).set_translation(Base.Asny.get_global_transform().origin)
+#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/Camera/")).set_translation(Base.Asny.get_global_transform().origin)
 #		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/")).set_translation(Vector3(0,0,0))
 		Base.target = get_node(Base.PsPlyRt).get_parent()
 		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-4.5,4.5,-.5))
@@ -35,6 +35,7 @@ func _process(delta):
 #		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor-1,"/O")).show()
 		get_tree().call_group("Collider","On")
 		if get_unit_offset() >= 1:
+			Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
 			Base.Bas = "F"
 			Base.PosAsny = PosiZ
 			Base.VelZ = 9
@@ -58,6 +59,9 @@ func _on_Area_body_entered(body):
 		Base.Bas = "H"
 		Base.VelZ = 4
 		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork")).hide()
+#		Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
+#		W.get_node("AsnyPlayer/ElAsny").set_traslation(Vector3(0,-1,0))
+#		Base.targetAsny.get_node("VR").set_traslation()
 ##		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/DirectionalLight")).hide()
 #		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor-1,"/C")).hide()
 #		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor,"/C")).hide()
@@ -70,6 +74,7 @@ func _on_Area_body_entered(body):
 		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-2,2.3,-0.2))
 		if Base.Ctrl == "VR":
 			Base.VelG = -.075
+			Base.targetAsnyVR.set_translation(Vector3(2,1.5,0.05))
 #			get_node(str("/root/Ctrl/VBoxContainer/ViewportContainer2/Viewport2/Spatial/Camera")).set_translation(Vector3(0.2,0,0))
 
 func _over():

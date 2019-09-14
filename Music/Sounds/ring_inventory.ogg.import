@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ring_inventory.ogg-d53c8d88e4441f04e41bbc37b62cb3f5.oggstr"
+
+[deps]
+
+source_file="res://Music/Sounds/ring_inventory.ogg"
+dest_files=[ "res://.import/ring_inventory.ogg-d53c8d88e4441f04e41bbc37b62cb3f5.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

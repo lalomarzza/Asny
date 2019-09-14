@@ -8,6 +8,7 @@ func _process(delta):
 
 func _on_SwipeDetector_swipe_ended(gesture):
 	if gesture.get_direction()=="left"||gesture.get_direction()=="up_left"||gesture.get_direction()=="down_left":
+		$AudioStreamPlayer2D.play()
 		Base.Ult = Base.PosAsny
 		Base.PosAsny = Base.PosAsny + Base.VelG
 		if Base.Bas == "F":
@@ -26,6 +27,7 @@ func _on_SwipeDetector_swipe_ended(gesture):
 		if Base.Bas == "W":
 			Base.Rtto.rotate(Vector3(0,1,0),deg2rad(11.25))
 	if gesture.get_direction()=="right"||gesture.get_direction()=="up_right"||gesture.get_direction()=="down_right":
+		$AudioStreamPlayer2D2.play()
 		Base.Ult = Base.PosAsny
 		Base.PosAsny = Base.PosAsny - Base.VelG
 		if Base.Bas == "F":

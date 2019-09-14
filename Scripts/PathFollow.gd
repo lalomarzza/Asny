@@ -18,6 +18,7 @@ func _process(delta):
 		dog.set_rotation(Vector3(0,0,0))
 		dog._start()
 	if get_unit_offset() >= .93:
+#		Base.W.get_node("AsnyPlayer/ElAsny").set_mode(2)
 		Base._ChangeF()
 		dog._end()
 		Base.target = get_node(Base.PsPlyRt).get_parent()
@@ -63,6 +64,7 @@ func _reload():
 	set_process(true)
 
 func _enter():
+	Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
 	get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-15,7,0))
 	set_unit_offset(.025)
 	Base.Posi = get_node(Base.PosPlF).get_rotation_degrees().z

@@ -9,6 +9,13 @@ var Hat = true
 var AsnyPress
 var AsnyPressHat
 
+var MR = [preload("res://Materials/ClothL.material"),
+preload("res://Materials/MetallicL.material"),
+preload("res://Materials/PapperL.material")
+]
+
+onready var tween = $Control2/Tween
+
 var Trans = false
 
 func _process(delta):
@@ -88,7 +95,7 @@ func _Shop():
 #
 
 func _on_TimerDiamond_timeout():
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/Diamond").hide()
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Diamond").hide()
 	pass # Replace with function body.
 
 func _Hat():
@@ -113,22 +120,83 @@ func _Hat():
 		get_node(str(Base.StoreP.get_child(0).get_path())+"/Esqueleto2/Cylinder").free()
 		Base.Store["HatB"] = 0
 
-func _on_Timer_timeout():
-	Base.Store["TH"] = true
+func _on_Hat_button_up():
+	_Cancel()
+
+func _Cancel():
+	tween.stop_all()
+	Price = 0
+	$Control2/TextureProgress/Diamond2.set_text(str(Price))
+	$Control2/TextureProgress.hide()
+
+var Price
+var ObjStr
+
+func _on_Hat_button_down():
+#	Base.Store["TH"] = false
+	if Base.Store["TH"] == false:
+		ObjStr = "TH"
+		Price = 25
+		$Control2/TextureProgress/Diamond2.set_text(str(Price))
+		$Control2/TextureProgress.show()
+		if Base.data["Diamond"] >= Price:
+			tween.interpolate_property($Control2/TextureProgress, "value", -200, 100, 3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+			tween.start()
+	else:
+		_Hat()
+
+
+func _on_Tween_tween_completed(object, key):
+	Base.Store[ObjStr] = true
 	Base.data["Diamond"] -= Price
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/Diamond").set_text(str(Base.data["Diamond"]))
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Diamond").set_text(str(Base.data["Diamond"]))
 	Base.save_store()
 	Base.save_data()
 
-func _on_Hat_button_up():
-	$Timer.stop()
+var Bullet = preload("res://Scenes/ObjectSingle/RocketB.scn")
+var BulletR = preload("res://Scenes/ObjectSingle/RocketR.scn")
+var RB
 
-var Price
-
-func _on_Hat_button_down():
-	if Base.Store["TH"] == false:
+func _on_R_button_down():
+	if Base.Store["TR"] == false:
+		ObjStr = "TR"
 		Price = 50
+		$Control2/TextureProgress/Diamond2.set_text(str(Price))
+		$Control2/TextureProgress.show()
 		if Base.data["Diamond"] >= Price:
-			$Timer.start()
+			tween.interpolate_property($Control2/TextureProgress, "value", -200, 100, 3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+			tween.start()
 	else:
-		_Hat()
+		if Base.Store["Rocket"] == "Red":
+			get_node(str(Base.StoreP.get_path(),"/Asny!ExportD/Esfera")).free()
+			RB = Bullet.instance()
+			get_node(str(Base.StoreP.get_path(),"/Asny!ExportD/")).add_child(RB)
+			Base.Store["Rocket"] = "Blue"
+			RB.set_owner(Base.AsnyPress)
+		else:
+			get_node(str(Base.StoreP.get_path(),"/Asny!ExportD/RocketB")).free()
+			RB = BulletR.instance()
+			get_node(str(Base.StoreP.get_path(),"/Asny!ExportD/")).add_child(RB)
+			Base.Store["Rocket"] = "Red"
+			RB.set_owner(Base.AsnyPress)
+
+func _on_R_button_up():
+	_Cancel()
+
+func _on_Button7_button_up():
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/").set_size(Vector2(216,384))
+	get_parent().set_scale(Vector2(.360,.385))
+	for m in MR.size():
+		for i in get_tree().get_nodes_in_group(str(m)):
+			i.set_surface_material(0,MR[m])
+	$Control1/Button7.hide()
+	$Control1/Button7R.show()
+
+func _print():
+	print("Hola")
+
+func _on_Button7R_button_down():
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/").set_size(Vector2(1080,1920))
+	get_parent().set_scale(Vector2(1,1))
+	$Control1/Button7.show()
+	$Control1/Button7R.hide()

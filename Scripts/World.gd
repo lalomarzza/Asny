@@ -154,7 +154,8 @@ func _SpawnS():
 			if CkRndCn == 4:
 				ContR += 1
 				if ContR == 5:
-					lasso = CR[randi()%1]
+					lasso = CR[randi()%2]
+					print(lasso)
 #					if Base.RX == 0:
 #						lasso = CR[2]
 #						print("Recua")
@@ -312,6 +313,6 @@ func _new():
 	if ContOnOb >= CObs:
 		Obbs = Obs[randi()%Obs.size()]
 		SpawnOb = Obbs.instance()
-		SpawnOb.rotate_y(randi()%359+1)
+		SpawnOb.set_rotation_degrees(Vector3(0,randi()%365,0))
 		get_node(str(S,"/O")).get_child(0).get_node(str(RPosHObs)).add_child(SpawnOb)
 		ContOnOb = 0

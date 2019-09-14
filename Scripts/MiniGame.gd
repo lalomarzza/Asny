@@ -33,3 +33,7 @@ func _Acc():
 		Base.Acc = true
 	else:
 		Base.Acc = false
+
+
+func _on_Button_button_up():
+	print("Hola")

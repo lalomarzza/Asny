@@ -25,6 +25,7 @@ var VelG = 0
 var Bas = "F"
 var VelZ = 9
 var Ctrl = "PL"
+var VR
 var NB = 0
 var PosAsny = 0
 var Pos = 4
@@ -37,7 +38,7 @@ var ContF = -135
 var ContF1 = 0
 var CFloor = 1
 var Vel
-var Diamond = 100
+var Diamond = 50
 const PuntMax = "user://data.dat"
 const password = "1234"
 var is_loaded = false
@@ -59,7 +60,7 @@ onready var CameraI = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/Camera")
 const StoreItems = "user://Store.dat"
 const passwordSt = "4321"
 var is_loadedSt = false
-var Store = {"Res" : 0, "HatB" : 0, "Hat" : true, "TH" : false, "TR" : true}
+var Store = {"Res" : 0, "HatB" : 0, "Hat" : true, "TH" : false, "TR" : false, "Rocket" : "Red"}
 
 func Reload():
 	Store["Res"] = 0
@@ -68,12 +69,14 @@ func Reload():
 	save_store()
 
 func ReloadS():
-	Store["TH"] = false
+	Store["Rocket"] = "Red"
+	Store["TR"] = false
 	save_store()
 
 func _ready():
 #	CameraI.set_interpolation_enabled(true)
 #	Base.CameraI.set_target_path(str(Base.W,"/Spatial/"))
+	Asny = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Asny!ExportD")
 	_ChangeF()
 	_Store()
 	AsnyPress = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/StoreAsny/Asny!ExportD/")
@@ -82,9 +85,11 @@ func _ready():
 		_readyPlayer()
 	if get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/Control1/Button4").connect("pressed",self,"_VR"):
 		_VR()
+	
 	Sv()
 	SvSt()
-	print(Store)
+	print("384*216")
+#	get_node("/root/Ctrl/VBox/VpCtrl/Vport/").set_size(Vector2(216,384))
 #	Res = int(Base.data["Rest"])
 #	ReloadS()
 
@@ -110,11 +115,8 @@ func _ChangeF():
 var VRS = false
 
 func _process(delta):
-#	if VRS == true:
-#		if Input.get_accelerometer().x >= 1:
-#			_readyPlayerVR()
-#			VRF._start()
-#			VRS = false
+	if Input.is_action_just_pressed("ui_up"):
+		Base.Cancel
 	if Input.is_action_just_pressed("ui_accept"):
 		if Ctrl == "VR":
 			_readyPlayerVR()
@@ -128,14 +130,14 @@ func _process(delta):
 		PosPlayerAsny = get_node(PsPlyRt)
 		f = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/F/")
 		ContF1 -= VelZ*delta
-		if f.get_rotation_degrees().x <= ContF:
+		if round(f.get_rotation_degrees().x) <= ContF:
 			ContF -= 1
 			if ContF == DN:
 				DN -= 90
 				if DN <= -360:
 					DN = 0
 					RX = 0
-				print(DN)
+#			print(ContF1)
 			f.get_parent()._Spawn()
 		f.set_rotation_degrees(Vector3(ContF1,0,0))
 
@@ -154,8 +156,8 @@ func load_data():
 	data = file.get_var()
 	file.close()
 	is_loaded = true
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/Coins").set_text(str(data["Score"]))
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/Diamond").set_text(str(data["Diamond"]))
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Coins").set_text(str(data["Score"]))
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Diamond").set_text(str(data["Diamond"]))
 
 func save_store():
 	var file = File.new()
@@ -177,29 +179,34 @@ var Cong = 0
 
 func _CoinC():
 	ContC += 1
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/Coins").set_text(str(ContC))
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Coins").set_text(str(ContC))
+	if Base.Ctrl == "VR":
+			Base.VR.get_node("Label").set_text(str(ContC))
 	if ContC >= Diamond:
 		_CoinD()
-		Diamond += 100
+		Diamond += 50
 	if ContC >= int(data["Score"]):
 		data["Score"] = ContC
 		save_data()
 		Cong += 1
 		if Cong == 2:
-			get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/CPUParticles2D").set_emitting(true)
+			get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/CPUParticles2D").set_emitting(true)
 
 func _CoinD():
 	ContC += 1
 	data["Diamond"] += 1
 	save_data()
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/Diamond").set_text(str(data["Diamond"]))
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/TimerDiamond").start()
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Diamond").set_text(str(data["Diamond"]))
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/TimerDiamond").start()
 
 func _rot():
 	Base.target.set_rotation(Vect)
 
+var Player
+
 func _readyPlayer():
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/TimerDiamond").start()
+#	W.get_node("AsnyPlayer/ElAsny").set_mode(1)
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/TimerDiamond").start()
 	Cong = 0
 	if Bas == "F":
 		VelG = .05
@@ -212,14 +219,15 @@ func _readyPlayer():
 		VelZ = 4
 	_musicAsnyPlay()
 	ContC = 0
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/Coins").set_text(str(ContC))
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Coins").set_text(str(ContC))
 	StoreP.remove_child(AsnyPress)
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer").add_child(AsnyPress)
+	Player = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/ElAsny")
+	Player.add_child(AsnyPress)
 	Asny = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Asny!ExportD")
 	_Ctrl()
 	press = true
 	targetAsny = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/")
-	targetAsny2 = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Asny!ExportD")
+	targetAsny2 = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/ElAsny/Asny!ExportD")
 	AsnyCtrl.hide()
 	CameraI.set_interpolation_enabled(true)
 	if Bas == "R":
@@ -230,12 +238,15 @@ func _readyPlayer():
 var VRF
 
 func _VR():
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/").hide()
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/").hide()
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/VR/").show()
 	_CtrlVR()
 #	W.get_node("AsnyPlayer/Spatial").set_rotation_degrees(Vector3(0,-90,90))
 	
 
 func _readyPlayerVR():
+	get_tree().call_group("Node2D","hide")
+#	W.get_node("AsnyPlayer/ElAsny").mode(0)
 	Cong = 0
 	if Bas == "F":
 		VelG = .005
@@ -245,7 +256,7 @@ func _readyPlayerVR():
 		VelG = -.125
 	_musicAsnyPlay()
 	ContC = 0
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Score/Coins").set_text(str(ContC))
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Coins").set_text(str(ContC))
 	StoreP.remove_child(AsnyPress)
 	get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/").add_child(AsnyPress)
 	Asny = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Asny!ExportD")
@@ -268,6 +279,7 @@ func _CtrlVR():
 	var CtrlTrue = ControlAsnyVR.instance()
 	get_node("/root/Ctrl/VBox/").add_child(CtrlTrue)
 	Ctrl = "VR"
+	get_tree().call_group("Node2D","show")
 
 func _musicAsnyON():
 	get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyMusic/").set_stream_paused(false)
