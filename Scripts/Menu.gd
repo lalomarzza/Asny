@@ -11,7 +11,18 @@ var AsnyPressHat
 
 var MR = [preload("res://Materials/ClothL.material"),
 preload("res://Materials/MetallicL.material"),
-preload("res://Materials/PapperL.material")
+preload("res://Materials/PapperL.material"),
+preload("res://Materials/PlasticL.material"),
+preload("res://Materials/CorkL.material"),
+preload("res://Materials/WatherL.material")
+]
+
+var MRD = [preload("res://Materials/Cloth.material"),
+preload("res://Materials/Metallic.material"),
+preload("res://Materials/Papper.material"),
+preload("res://Materials/Plastic.material"),
+preload("res://Materials/Cork.material"),
+preload("res://Materials/Wather.material")
 ]
 
 onready var tween = $Control2/Tween
@@ -19,7 +30,8 @@ onready var tween = $Control2/Tween
 var Trans = false
 
 func _process(delta):
-	$Label.set_text(str(Input.get_accelerometer()))
+#	$Label.set_text(str(Input.get_accelerometer
+	pass
 
 func _on_Music_pressed():
 	var Menu = get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/Control1/Music")
@@ -52,7 +64,7 @@ func _on_Sound_pressed():
 		Sound = true
 
 func _on_Store_pressed():
-	var Menu = get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/Control2/Hat")
+	var Menu = get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/Control2/Hat")
 	Base.CameraI.set_target(Base.W.get_node("StoreAsny/Spatial"))
 	Base.StoreP.set_global_transform(Base.CameraI.get_node("StoreAsny").get_global_transform())
 	print(str(Base.W.get_child(1).get_path()))
@@ -95,11 +107,11 @@ func _Shop():
 #
 
 func _on_TimerDiamond_timeout():
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Diamond").hide()
+	get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").hide()
 	pass # Replace with function body.
 
 func _Hat():
-	var Menu = get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/Control2/Hat")
+	var Menu = get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/Control2/Hat")
 	if Base.Store["Hat"] == true:
 		
 		OS.set_icon(load("res://icon.png"))
@@ -108,7 +120,8 @@ func _Hat():
 		Menu.get_child(1).show()
 		Base.Store["Hat"] = false
 		AsnyPressHat = AsnyHat.instance()
-		get_node(str(Base.StoreP.get_child(0).get_path())+"/Esqueleto2").add_child(AsnyPressHat)
+		print(get_node(str(Base.StoreP.get_child(0).get_path())))
+		get_node(str(Base.StoreP.get_path())+"/Asny!ExportD/Esqueleto2").add_child(AsnyPressHat)
 		AsnyPressHat.set_owner(Base.AsnyPress)
 		Base.Store["HatB"] = 1
 #		Base.AsnyPress.set_translation(Vector3(0,55,0))
@@ -117,7 +130,7 @@ func _Hat():
 		Menu.get_child(0).show()
 		Menu.get_child(1).hide()
 		Base.Store["Hat"] = true
-		get_node(str(Base.StoreP.get_child(0).get_path())+"/Esqueleto2/Cylinder").free()
+		get_node(str(Base.StoreP.get_child(1).get_path())+"/Esqueleto2/Cylinder").free()
 		Base.Store["HatB"] = 0
 
 func _on_Hat_button_up():
@@ -145,11 +158,10 @@ func _on_Hat_button_down():
 	else:
 		_Hat()
 
-
 func _on_Tween_tween_completed(object, key):
 	Base.Store[ObjStr] = true
 	Base.data["Diamond"] -= Price
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Diamond").set_text(str(Base.data["Diamond"]))
+	get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").set_text(str(Base.data["Diamond"]))
 	Base.save_store()
 	Base.save_data()
 
@@ -184,19 +196,25 @@ func _on_R_button_up():
 	_Cancel()
 
 func _on_Button7_button_up():
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/").set_size(Vector2(216,384))
-	get_parent().set_scale(Vector2(.360,.385))
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/").set_size(Vector2(162,288))#216,384))
+#	get_parent().set_scale(Vector2(.2,.2))
 	for m in MR.size():
 		for i in get_tree().get_nodes_in_group(str(m)):
 			i.set_surface_material(0,MR[m])
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/MultiMeshInstance").set_material_override(MR[3])
+#	get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/").set_material_override(MR[4])
 	$Control1/Button7.hide()
 	$Control1/Button7R.show()
 
-func _print():
+func _Change():
 	print("Hola")
 
 func _on_Button7R_button_down():
 	get_node("/root/Ctrl/VBox/VpCtrl/Vport/").set_size(Vector2(1080,1920))
-	get_parent().set_scale(Vector2(1,1))
+#	get_parent().set_scale(Vector2(1,1))
+	for m in MRD.size():
+		for i in get_tree().get_nodes_in_group(str(m)):
+			i.set_surface_material(0,MRD[m])
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/MultiMeshInstance").set_material_override(MRD[3])
 	$Control1/Button7.show()
 	$Control1/Button7R.hide()

@@ -15,31 +15,9 @@ func _process(delta):
 	Unit = get_unit_offset()
 	UnitC = 1
 	if Unit >= UnitC:
-		Base._ChangeF()
-		get_node(Base.PosPlF).get_rotation_degrees()
-#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/Camera/")).set_translation(Base.Asny.get_global_transform().origin)
-#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/")).set_translation(Vector3(0,0,0))
-		Base.target = get_node(Base.PsPlyRt).get_parent()
-		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-4.5,4.5,-.5))
-		Base.VelG = 0.05
-		if Base.Ctrl == "VR":
-			Base.VelG = 0.01
-#			get_node(str("/root/Ctrl/VBoxContainer/ViewportContainer2/Viewport2/Spatial/Camera")).set_translation(Vector3(1,0,0))
-		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork")).show()
-##		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/DirectionalLight")).show()
-#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor,"/C")).show()
-#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor-1,"/C")).show()
-#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor,"/M")).show()
-#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor-1,"/M")).show()
-#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor,"/O")).show()
-#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor-1,"/O")).show()
-		get_tree().call_group("Collider","On")
+		_overG()
 		if get_unit_offset() >= 1:
-			Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
-			Base.Bas = "F"
-			Base.PosAsny = PosiZ
-			Base.VelZ = 9
-			set_process(false)
+			_over()
 
 func _on_Area_body_entered(body):
 	if body.is_in_group("Detect"):
@@ -51,6 +29,7 @@ func _on_Area_body_entered(body):
 #		get_node(Base.AsnyPress.get_path()).set_translation(PosiO)
 		Posi = get_node(Base.PosPlF).get_rotation_degrees().x
 		PosiZ = Base.PosAsny
+		print(PosiZ)
 		set_process(true)
 		Base.PsPlyRt = str($Spatial/AsnyControl/Control.get_path())
 		$Area/CollisionShape.set_disabled(true)
@@ -71,7 +50,7 @@ func _on_Area_body_entered(body):
 #		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor-1,"/O")).hide()
 #		Base.AsnyPress.set_translation(Vector3(0,0,0))
 #		body.get_parent().set_translation(Vector3(0,.4,0))
-		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-2,2.3,-0.2))
+		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-3,3.5,0))
 		if Base.Ctrl == "VR":
 			Base.VelG = -.075
 			Base.targetAsnyVR.set_translation(Vector3(2,1.5,0.05))
@@ -79,6 +58,21 @@ func _on_Area_body_entered(body):
 
 func _over():
 	set_process(false)
+	Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
+	Base.Bas = "F"
+	Base.PosAsny = PosiZ
+	Base.VelZ = 9
+
+func _overG():
+	Base._ChangeF()
+	get_node(Base.PosPlF).get_rotation_degrees()
+	Base.target = get_node(Base.PsPlyRt).get_parent()
+	get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-3,20,0))
+	Base.VelG = 0.05
+	if Base.Ctrl == "VR":
+		Base.VelG = 0.01
+	get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork")).show()
+	get_tree().call_group("Collider","On")
 
 func _reload():
 	set_process(true)

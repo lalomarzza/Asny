@@ -12,7 +12,6 @@ func _Game():
 	$Node2D.set_rotation_degrees(Rot1)
 	Rot2 = RotP[randi()%RotP.size()]
 	$Node2D2.set_rotation_degrees(Rot2)
-	show()
 
 func _on_TextureButton2_button_up():
 	Rot2 += 90

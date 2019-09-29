@@ -18,18 +18,21 @@ func _process(delta):
 		dog.set_rotation(Vector3(0,0,0))
 		dog._start()
 	if get_unit_offset() >= .93:
-#		Base.W.get_node("AsnyPlayer/ElAsny").set_mode(2)
-		Base._ChangeF()
-		dog._end()
-		Base.target = get_node(Base.PsPlyRt).get_parent()
-		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-4.5,4.5,-.5))
+		_overG()
+
+func _overG():
+	Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
+	Base._ChangeF()
+	dog._end()
+	Base.target = get_node(Base.PsPlyRt).get_parent()
+	get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-3,20,0))
 #		get_node(Base.PosPlF).set_rotation_degrees(Vector3(Posi+0,0,0))
-		Base.VelG = 0.05
-		Base.Bas = "F"
-		Base.PosAsny = PosiZ
-		Base.VelZ = 9
-		set_process(false)
-		Base.VelR = 5
+	Base.VelG = 0.05
+	Base.Bas = "F"
+	Base.PosAsny = PosiZ
+	Base.VelZ = 9
+	set_process(false)
+	Base.VelR = 5
 
 var Bod
 
@@ -43,7 +46,7 @@ func _on_Area_body_entered(body):
 		else:
 			_Down()
 		Base.Acc = false
-		get_node("/root/Ctrl/VBox/VpCtrl/Vport/MiniGameR").hide()
+		get_node("/root/Ctrl/VBox/VpCtrl/MiniGameR").hide()
 
 func _Down():
 	Base.PosPlayerAsny.set_translation(Vector3(0,50.75,0))
@@ -58,6 +61,10 @@ func _Down():
 	Base.VelZ = 9
 
 func _over():
+	Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
+	Base.Bas = "F"
+	Base.PosAsny = PosiZ
+	Base.VelZ = 9
 	set_process(false)
 
 func _reload():

@@ -1,4 +1,40 @@
 extends Spatial
+#
+#const Terrain = [preload("res://Scenes/ObjectSingle/Coin.scn"),
+#preload("res://Scenes/ObjectSingle/R1.scn"),
+#preload("res://Scenes/ObjectSingle/Tree.scn"),
+#preload("res://Scenes/ObjectSingle/Pine.scn"),
+#preload("res://Scenes/ObjectSingle/MntD.scn"),
+#preload("res://Scenes/ObjectSingle/MntI.scn"),
+#preload("res://Scenes/ObjectSingle/CorkNClothD.scn"),
+#preload("res://Scenes/ObjectSingle/CorkNClothI.scn"),
+#preload("res://Scenes/ObjectSingle/Hose1.scn"),
+#preload("res://Scenes/ObjectSingle/Lasso.scn"),
+#preload("res://Scenes/ObjectSingle/RecuaNCork.scn"),
+#preload("res://Scenes/ObjectSingle/Hill1.scn"),
+#preload("res://Scenes/ObjectSingle/Platform.scn"),
+#preload("res://Scenes/ObjectSingle/HHA.scn"),
+#preload("res://Scenes/ObjectSingle/Pig.scn"),
+#preload("res://Scenes/ObjectSingle/Ramp.scn")]
+#
+#var Tr
+#var SpwTr
+#var r = 0
+#var num1 = 0
+#
+#func _ready():
+#	_Spawn()
+#
+#func _Spawn():
+#	for i in 4:
+#		for m in num1:
+#			r -= 12
+#			Tr = Terrain[0]#randi()%Terrain.size()]
+#			SpwTr = Tr.instance()
+#			SpwTr.set_rotation(Vector3(m,0,0))
+#			SpwTr.set_translation(Vector3(0,50,0))
+#			$Terrain.add_child(SpwTr)
+#		num1 += 30
 
 const Power = [preload("res://Scenes/ObjectSingle/Coin.scn"),
 preload("res://Scenes/ObjectSingle/Coin.scn")]
@@ -95,6 +131,14 @@ func _ready():
 	Base.RX = randi()%4
 	print(Base.RX)
 	Base.DN = -((Base.RX*90)+90)
+	if Base.DN == 0 || Base.DN == -270:
+		print("Dia")
+		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").show()
+		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").hide()
+	else:
+		print("Noche")
+		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").hide()
+		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").show()
 	print(Base.DN)
 	self.rotate(Vector3(1,0,0),rad2deg(Base.RX*90))
 	_Start()

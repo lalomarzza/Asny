@@ -19,7 +19,7 @@ func _Pw():
 		get_child(i).add_child(SpawnPw)
 
 func _on_Area_body_entered(body):
-#	if body.is_in_group("Detect"):
+	if body.is_in_group("Detect"):
 #		if ID == "I":
 #			Base.Vect = Vector3(0,0,.075)
 #			Base._rot()
@@ -110,7 +110,7 @@ func _on_Recua_body_entered(body):
 		else:
 			_Down()
 		Base.Acc = false
-		get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/MiniGameR").hide()
+		get_node("/root/Ctrl/VBox/VpCtrl/Vport/MiniGameR").hide()
 
 func _Down():
 	Base.PosPlayerAsny.set_translation(Vector3(0,50.75,0))
@@ -138,30 +138,27 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 func _on_Game_body_entered(body):
 	Base.Bas = "M"
 	Base.VelZ = 3
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/MiniGameR")._Game()
+	get_node("/root/Ctrl/VBox/VpCtrl/MiniGameR")._Game()
+	get_node("/root/Ctrl/VBox/VpCtrl/MiniGameR").show()
+
+func Detect():
+	Base.PosPlayerAsny.set_translation(Vector3(0,50.75,0))
+	Base.Alt = 50.75
+	Base.targetAsny2.get_node("AnimationPlayer").play("000")
+	if Base.Fn == false:
+		Base.Vect = Vector3(0,0,Base.Ult)
+		Base._rot()
+		Base.PosAsny = Base.Ult
+		Base.Fn = true
+
 
 func _on_Area_body_exited(body):
 	if body.is_in_group("Detect"):
-#		Base.Player.apply_impulse(Vector3(0,2,0),Vector3(0,2,0))
-		Base.PosPlayerAsny.set_translation(Vector3(0,50.75,0))
-		Base.Alt = 50.75
-		Base.targetAsny2.get_node("AnimationPlayer").play("000")
-		if Base.Fn == false:
-			Base.Vect = Vector3(0,0,Base.Ult)
-			Base._rot()
-			Base.PosAsny = Base.Ult
-			Base.Fn = true
+		Detect()
 
 func _on_Up_body_exited(body):
 	if body.is_in_group("Detect"):
-		Base.PosPlayerAsny.set_translation(Vector3(0,50.75,0))
-		Base.Alt = 50.75
-		Base.targetAsny2.get_node("AnimationPlayer").play("000")
-		if Base.Fn == false:
-			Base.Vect = Vector3(0,0,Base.Ult)
-			Base._rot()
-			Base.PosAsny = Base.Ult
-			Base.Fn = true
+		Detect()
 
 #func _on_Rot_body_entered(body):
 #	if body.is_in_group("Rot"):

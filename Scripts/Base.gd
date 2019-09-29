@@ -8,7 +8,7 @@ var targetAsny
 var targetAsnyVR
 var targetAsny2
 var Asny
-onready var AsnyCtrl = get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control")
+onready var AsnyCtrl = get_node("/root/Ctrl/VBox/VpCtrl/Control")
 var Hide
 #var Res = 1
 var Acc = false
@@ -70,7 +70,7 @@ func Reload():
 
 func ReloadS():
 	Store["Rocket"] = "Red"
-	Store["TR"] = false
+#	Store["TR"] = false
 	save_store()
 
 func _ready():
@@ -81,9 +81,9 @@ func _ready():
 	_Store()
 	AsnyPress = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/StoreAsny/Asny!ExportD/")
 #	OS.set_icon(load("res://examples/test_reference.png"))
-	if get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/Control1/Button").connect("pressed",self,"_readyPlayer"):
+	if get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/Control1/Button").connect("pressed",self,"_readyPlayer"):
 		_readyPlayer()
-	if get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/Control1/Button4").connect("pressed",self,"_VR"):
+	if get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/Control1/Button4").connect("pressed",self,"_VR"):
 		_VR()
 	
 	Sv()
@@ -117,27 +117,37 @@ var VRS = false
 func _process(delta):
 	if Input.is_action_just_pressed("ui_up"):
 		Base.Cancel
-	if Input.is_action_just_pressed("ui_accept"):
-		if Ctrl == "VR":
-			_readyPlayerVR()
-			VRF.Strt = true
-		else:
-			_readyPlayer()
 	if press == false:
-		pass
+		if Input.get_accelerometer().x >= 2:
+			Base._readyPlayer()
+		if Input.is_action_just_pressed("ui_accept"):
+			if Ctrl == "VR":
+				_readyPlayerVR()
+				VRF.Strt = true
+			else:
+				_readyPlayer()
 	if press == true:
 		PosPlayer = get_node(PsPlyRt).global_transform
 		PosPlayerAsny = get_node(PsPlyRt)
 		f = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/F/")
 		ContF1 -= VelZ*delta
+#		prints (ContF,round(f.get_rotation_degrees().x))
 		if round(f.get_rotation_degrees().x) <= ContF:
 			ContF -= 1
-			if ContF == DN:
+#			prints(DN,ContF1)
+			if round(ContF1) == DN:
 				DN -= 90
+			if DN <= -180:
+#				print("Dia")
+				get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").show()
+				get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").hide()				
 				if DN <= -360:
 					DN = 0
 					RX = 0
-#			print(ContF1)
+			else:
+#				print("Noche")
+				get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").hide()
+				get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").show()
 			f.get_parent()._Spawn()
 		f.set_rotation_degrees(Vector3(ContF1,0,0))
 
@@ -156,8 +166,8 @@ func load_data():
 	data = file.get_var()
 	file.close()
 	is_loaded = true
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Coins").set_text(str(data["Score"]))
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Diamond").set_text(str(data["Diamond"]))
+	get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Coins").set_text(str(data["Score"]))
+	get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").set_text(str(data["Diamond"]))
 
 func save_store():
 	var file = File.new()
@@ -179,7 +189,7 @@ var Cong = 0
 
 func _CoinC():
 	ContC += 1
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Coins").set_text(str(ContC))
+	get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Coins").set_text(str(ContC))
 	if Base.Ctrl == "VR":
 			Base.VR.get_node("Label").set_text(str(ContC))
 	if ContC >= Diamond:
@@ -190,14 +200,14 @@ func _CoinC():
 		save_data()
 		Cong += 1
 		if Cong == 2:
-			get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/CPUParticles2D").set_emitting(true)
+			get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/CPUParticles2D").set_emitting(true)
 
 func _CoinD():
 	ContC += 1
 	data["Diamond"] += 1
 	save_data()
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Diamond").set_text(str(data["Diamond"]))
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/TimerDiamond").start()
+	get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").set_text(str(data["Diamond"]))
+	get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/TimerDiamond").start()
 
 func _rot():
 	Base.target.set_rotation(Vect)
@@ -206,7 +216,7 @@ var Player
 
 func _readyPlayer():
 #	W.get_node("AsnyPlayer/ElAsny").set_mode(1)
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/TimerDiamond").start()
+	get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/TimerDiamond").start()
 	Cong = 0
 	if Bas == "F":
 		VelG = .05
@@ -219,7 +229,7 @@ func _readyPlayer():
 		VelZ = 4
 	_musicAsnyPlay()
 	ContC = 0
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Coins").set_text(str(ContC))
+	get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Coins").set_text(str(ContC))
 	StoreP.remove_child(AsnyPress)
 	Player = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/ElAsny")
 	Player.add_child(AsnyPress)
@@ -230,16 +240,16 @@ func _readyPlayer():
 	targetAsny2 = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/ElAsny/Asny!ExportD")
 	AsnyCtrl.hide()
 	CameraI.set_interpolation_enabled(true)
-	if Bas == "R":
-		BasNode._reload()
-	if Bas == "H":
-		BasNode._reload()
+#	if Bas == "R":
+#		BasNode._reload()
+#	if Bas == "H":
+#		BasNode._reload()
 
 var VRF
 
 func _VR():
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/").hide()
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/VR/").show()
+	get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/").hide()
+	get_node("/root/Ctrl/VBox/VpCtrl/Control/VR/").show()
 	_CtrlVR()
 #	W.get_node("AsnyPlayer/Spatial").set_rotation_degrees(Vector3(0,-90,90))
 	
@@ -256,7 +266,7 @@ func _readyPlayerVR():
 		VelG = -.125
 	_musicAsnyPlay()
 	ContC = 0
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Score/Coins").set_text(str(ContC))
+	get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Coins").set_text(str(ContC))
 	StoreP.remove_child(AsnyPress)
 	get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/").add_child(AsnyPress)
 	Asny = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Asny!ExportD")
@@ -271,8 +281,10 @@ func _readyPlayerVR():
 	if Bas == "H":
 		BasNode._reload()
 
+var CtrlTrue
+
 func _Ctrl():
-	var CtrlTrue = ControlAsny.instance()
+	CtrlTrue = ControlAsny.instance()
 	get_node("/root/Ctrl/VBox/VpCtrl").add_child(CtrlTrue)
 
 func _CtrlVR():
@@ -301,7 +313,7 @@ func _musicAsnyStop():
 var CtrlH
 
 func _Store():
-	CtrlH = get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/Control2/Hat")
+	CtrlH = get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/Control2/Hat")
 	if Store["HatB"] == 0:
 		CtrlH.get_child(0).show()
 		CtrlH.get_child(1).hide()

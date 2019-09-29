@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="Asny!"
 run/main_scene="res://Scenes/Control.scn"
-config/icon="res://asnyicon1.png"
+config/icon="res://asnyicon.png"
 
 [autoload]
 
