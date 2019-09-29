@@ -137,17 +137,17 @@ func _process(delta):
 #			prints(DN,ContF1)
 			if round(ContF1) == DN:
 				DN -= 90
-			if DN <= -180:
-#				print("Dia")
-				get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").show()
-				get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").hide()				
-				if DN <= -360:
-					DN = 0
-					RX = 0
-			else:
-#				print("Noche")
-				get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").hide()
-				get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").show()
+				if DN <= -270:
+					print("Dia")
+					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").show()
+					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").hide()				
+					if DN <= -360:
+						DN = 0
+						RX = 0
+				else:
+					print("Noche")
+					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").hide()
+					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").show()
 			f.get_parent()._Spawn()
 		f.set_rotation_degrees(Vector3(ContF1,0,0))
 
