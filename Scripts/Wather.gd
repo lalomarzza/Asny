@@ -1,13 +1,22 @@
 extends Spatial
 
-var ContF1 = 0
-
-var Vect = Vector3(-1,0,0)
-
-func _process(delta):
-	ContF1 = -0.5 * delta
-	Base.Rtto.set_rotation(Base.Rtto.get_rotation()+Vector3(ContF1,0,0))
-#	Base.Rtto.rotate(Vect,deg2rad(1.0))
+#
+#func _on_SwipeDetector_swipe_ended(gesture):
+#	if gesture.get_direction()=="left"||gesture.get_direction()=="up_left"||gesture.get_direction()=="down_left":
+##		Base.Rott.set_rotation_degrees(Base.Rtto.get_rotation_degrees())
+#		Rott.rotate(Vector3(0,1,0),deg2rad(-11.25))
+##		Vect = Vector3(-1,0,0)
+##		Base.RotY += 11.25
+##		Base.Rott.set_rotation_degrees(Base.Rtto.get_rotation_degrees())
+##		Base.Rtto.set_rotation(Vector3(0,0,0))
+#	if gesture.get_direction()=="right"||gesture.get_direction()=="up_right"||gesture.get_direction()=="down_right":
+##		Base.Rott.set_rotation_degrees(Base.Rtto.get_rotation_degrees())
+#		Rott.rotate(Vector3(0,-1,0),deg2rad(-11.25))
+##		Vect = Vector3(0,1,0)
+##		Base.RotY -= 11.25
+##		Base.Rott.set_rotation_degrees(Base.Rtto.get_rotation_degrees()+Vector3(Base.RotY,Base.RotY,0))
+##		print(Base.Rtto.get_rotation_degrees()+Vector3(0,Base.RotY,0))
+##		Base.Rtto.set_rotation(Vector3(0,0,0))
 
 const ObW = [preload("res://Scenes/ObjectSingle/ObW.scn")]
 var ObWh
@@ -19,9 +28,12 @@ var RT = 90
 var TW = -1.2
 var TH = 0
 
+
 func _ready():
 	Base.Rott = $Base/
 	Base.Rtto = $Base/Spatial
+	Base.ly = $Base/Spatial/L
+	Base.ry = $Base/Spatial/R
 	randomize()
 	for i in 8:
 		while PosW <= 330:
@@ -42,20 +54,27 @@ func _ready():
 		PosW = 0
 
 
-#
-#func _on_SwipeDetector_swipe_ended(gesture):
-#	if gesture.get_direction()=="left"||gesture.get_direction()=="up_left"||gesture.get_direction()=="down_left":
-##		Base.Rott.set_rotation_degrees(Base.Rtto.get_rotation_degrees())
-#		Base.Rott.rotate(Vector3(0,1,0),deg2rad(22.5))
-##		Vect = Vector3(-1,0,0)
-##		Base.RotY += 11.25
-##		Base.Rott.set_rotation_degrees(Base.Rtto.get_rotation_degrees())
-##		Base.Rtto.set_rotation(Vector3(0,0,0))
-#	if gesture.get_direction()=="right"||gesture.get_direction()=="up_right"||gesture.get_direction()=="down_right":
-##		Base.Rott.set_rotation_degrees(Base.Rtto.get_rotation_degrees())
-#		Base.Rott.rotate(Vector3(0,-1,0),deg2rad(22.5))
-##		Vect = Vector3(0,1,0)
-##		Base.RotY -= 11.25
-##		Base.Rott.set_rotation_degrees(Base.Rtto.get_rotation_degrees()+Vector3(Base.RotY,Base.RotY,0))
-##		print(Base.Rtto.get_rotation_degrees()+Vector3(0,Base.RotY,0))
-##		Base.Rtto.set_rotation(Vector3(0,0,0))
+var ContF1 = 0
+
+var Vect = Vector3(0,0,0)
+
+var Rott
+var Rtto
+
+var cc
+
+func _process(delta):
+	cc = $Base/Spatial/C.get_global_transform()
+	Base.Rott.set_global_transform(cc)
+
+var yy
+var ry
+var ly
+
+#func _on_SwipeDetector_swipe_updated(partial_gesture):
+#	if partial_gesture.get_direction()=="left"||partial_gesture.get_direction()=="up_left"||partial_gesture.get_direction()=="down_left":
+#		Base.ry = $Base/Spatial/L.get_global_transform()
+#		Rott.set_global_transform(ry)
+#	if partial_gesture.get_direction()=="right"||partial_gesture.get_direction()=="up_right"||partial_gesture.get_direction()=="down_right":
+#		Base.ly = $Base/Spatial/R.get_global_transform()
+#		Rott.set_global_transform(ly)

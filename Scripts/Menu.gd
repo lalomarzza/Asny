@@ -66,7 +66,6 @@ func _on_Sound_pressed():
 func _on_Store_pressed():
 	var Menu = get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/Control2/Hat")
 	Base.CameraI.set_target(Base.W.get_node("StoreAsny/Spatial"))
-	Base.StoreP.set_global_transform(Base.CameraI.get_node("StoreAsny").get_global_transform())
 	print(str(Base.W.get_child(1).get_path()))
 	get_node("Control1").hide()
 	get_node("Control2").show()

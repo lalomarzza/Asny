@@ -64,6 +64,7 @@ var Plat = preload("res://Scenes/ObjectSingle/Platform.scn")
 const WT = [preload("res://Scenes/ObjectSingle/HHA.scn"),
 preload("res://Scenes/ObjectSingle/Pig.scn")]
 var Ramp = preload("res://Scenes/ObjectSingle/Ramp.scn")
+var CkRv = preload("res://Scenes/ObjectSingle/CorkRiver.scn")
 
 var Floor = preload("res://Scenes/FloorU.scn")
 
@@ -124,6 +125,8 @@ var HS = 0
 var NS = 0
 var PS = 0
 
+var rot = 0
+
 var lasso
 
 func _ready():
@@ -131,7 +134,7 @@ func _ready():
 	Base.RX = randi()%4
 	print(Base.RX)
 	Base.DN = -((Base.RX*90)+90)
-	if Base.DN == 0 || Base.DN == -270:
+	if Base.DN1 >= 180:
 		print("Dia")
 		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").show()
 		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").hide()
@@ -141,6 +144,7 @@ func _ready():
 		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").show()
 	print(Base.DN)
 	self.rotate(Vector3(1,0,0),rad2deg(Base.RX*90))
+	rot = self.get_rotation_degrees().x
 	_Start()
 
 func _Start():
@@ -164,6 +168,8 @@ func _Spawn():
 		ContSpw += 1
 		_SpawnS()
 
+var BoolM = false
+
 func _SpawnS():
 	S += 1
 	s += .2
@@ -183,14 +189,6 @@ func _SpawnS():
 	ContMn += 1
 	ContCk += 1
 	RPosHObs = int(rand_range(Rng1,Rng2))
-	
-	if ContMn == ContMnPos:
-		Mn1 = get_node(str(S,"/M")).get_child(0).get_node("Mntn")
-		SpawnMn1 = M1.instance()
-		Mn1.add_child(SpawnMn1)
-		SpawnMn2 = M2.instance()
-		Mn1.add_child(SpawnMn2)
-		ContMnPos += 12
 	if ContCk == ContCkPos:
 		CkRndCn += 1
 		if CkRnd == 1:
@@ -198,11 +196,13 @@ func _SpawnS():
 			if CkRndCn == 4:
 				ContR += 1
 				if ContR == 5:
-					lasso = CR[randi()%2]
-					print(lasso)
-#					if Base.RX == 0:
-#						lasso = CR[2]
-#						print("Recua")
+					lasso = CR[0]#randi()%2]
+					if Base.DN == 0 || Base.DN == -270:
+						print("Dia")
+					else:
+						print("Noche")
+						lasso = CR[2]
+						print("Recua")
 					SpawnCk = lasso.instance()
 					ContR = 0
 					SpawnCk.set_translation(Vector3(0,ObH,0))
@@ -241,10 +241,13 @@ func _SpawnS():
 			if CkRndCn == 4:
 				ContR += 1
 				if ContR == 5:
-					lasso = CR[randi()%1]
-#					if Base.RX == 0:
-#						lasso = CR[2]
-#						print("Recua")
+					lasso = CR[0]#randi()%1]
+					if Base.DN == 0 || Base.DN == -270:
+						print("Dia")
+					else:
+						print("Noche")
+						lasso = CR[2]
+						print("Recua")
 					SpawnCk = lasso.instance()
 					SpawnCk.set_translation(Vector3(0,float(ObH),0))
 					Ck = get_node(str(S,"/L")).get_child(0).get_node("CorkI")
@@ -283,7 +286,6 @@ func _SpawnS():
 			if c == 5:
 				NewC.set_translation(Vector3(0,51.5,0))
 				NewCk.add_child(NewC)
-				
 			if c == 10:
 				CkRnd = randi()%2+1
 				c = 0
@@ -311,6 +313,17 @@ func _SpawnS():
 			ObH = 51
 			ObR = -1
 		ContCkPos += 6
+	if ContMn == ContMnPos:
+		Mn1 = get_node(str(S,"/M")).get_child(0).get_node("Mntn")
+		if BoolM == true:
+			SpawnMn1 = CkRv.instance()
+			Mn1.add_child(SpawnMn1)
+		else:
+			SpawnMn1 = M1.instance()
+			Mn1.add_child(SpawnMn1)
+			SpawnMn2 = M2.instance()
+			Mn1.add_child(SpawnMn2)
+		ContMnPos += 12
 	if S == ContSpawn:
 		ContSpawn += 360
 		n = 0
@@ -320,6 +333,7 @@ func _SpawnS():
 
 var Obbs
 var CObs = 8
+var BoolO
 
 func _new():
 	match S:
@@ -355,8 +369,9 @@ func _new():
 		if ContPw == 7:
 			BoolPw = 1
 	if ContOnOb >= CObs:
-		Obbs = Obs[randi()%Obs.size()]
-		SpawnOb = Obbs.instance()
-		SpawnOb.set_rotation_degrees(Vector3(0,randi()%365,0))
-		get_node(str(S,"/O")).get_child(0).get_node(str(RPosHObs)).add_child(SpawnOb)
-		ContOnOb = 0
+		if BoolO == true:
+			Obbs = Obs[randi()%Obs.size()]
+			SpawnOb = Obbs.instance()
+			SpawnOb.set_rotation_degrees(Vector3(0,randi()%365,0))
+			get_node(str(S,"/O")).get_child(0).get_node(str(RPosHObs)).add_child(SpawnOb)
+			ContOnOb = 0

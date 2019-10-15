@@ -11,8 +11,9 @@ func _on_Area_body_entered(body):
 		Base._musicAsnyStop()
 		get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").set_text(str(Base.data["Diamond"]))
 		get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").show()
+		Base.StoreP.set_global_transform(Base.CameraI.get_node("StoreAsny").get_global_transform())
 		call_deferred("_quit")
-		Base.targetAsny.get_node("CPUParticles").set_emitting(true)
+		Base.StoreP.get_node("Bubble").set_emitting(true)
 		if Base.Ctrl == "VR":
 			Base.VRF.Strt = false
 			get_tree().call_group("Node2D","show")

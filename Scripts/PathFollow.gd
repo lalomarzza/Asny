@@ -72,7 +72,7 @@ func _reload():
 
 func _enter():
 	Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
-	get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-15,7,0))
+	get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-10,7,0))
 	set_unit_offset(.025)
 	Base.Posi = get_node(Base.PosPlF).get_rotation_degrees().z
 	PosiZ = Base.PosAsny

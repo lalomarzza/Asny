@@ -50,7 +50,7 @@ func _on_Area_body_entered(body):
 #		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor-1,"/O")).hide()
 #		Base.AsnyPress.set_translation(Vector3(0,0,0))
 #		body.get_parent().set_translation(Vector3(0,.4,0))
-		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-3,3.5,0))
+		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-1,3.5,0))
 		if Base.Ctrl == "VR":
 			Base.VelG = -.075
 			Base.targetAsnyVR.set_translation(Vector3(2,1.5,0.05))

@@ -3,6 +3,9 @@ extends Control
 var Follow_Speed = 5
 var RotY
 
+var ly
+var ry
+
 func _process(delta):
 	Base.targetAsny.global_transform = Base.targetAsny.global_transform.interpolate_with(Base.PosPlayer,delta*Follow_Speed)
 
@@ -25,7 +28,8 @@ func _on_SwipeDetector_swipe_ended(gesture):
 			Base.Vect = Vector3(0,Base.PosAsny,0)
 			Base._rot()
 		if Base.Bas == "W":
-			Base.Rtto.rotate(Vector3(0,1,0),deg2rad(11.25))
+			ly = Base.ly.get_global_transform()
+			Base.Rott.set_global_transform(ly)
 	if gesture.get_direction()=="right"||gesture.get_direction()=="up_right"||gesture.get_direction()=="down_right":
 		$AudioStreamPlayer2D2.play()
 		Base.Ult = Base.PosAsny
@@ -44,7 +48,8 @@ func _on_SwipeDetector_swipe_ended(gesture):
 			Base.Vect = Vector3(0,Base.PosAsny,0)
 			Base._rot()
 		if Base.Bas == "W":
-			Base.Rtto.rotate(Vector3(0,-1,0),deg2rad(11.25))
+			ry = Base.ry.get_global_transform()
+			Base.Rott.set_global_transform(ry)
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_left"):
@@ -64,7 +69,8 @@ func _input(event):
 			Base.Vect = Vector3(0,Base.PosAsny,0)
 			Base._rot()
 		if Base.Bas == "W":
-			Base.Rott.rotate(Vector3(0,1,0),deg2rad(11.25))
+			ly = Base.ly.get_global_transform()
+			Base.Rott.set_global_transform(ly)
 	if Input.is_action_just_pressed("ui_right"):
 		Base.Ult = Base.PosAsny
 		Base.PosAsny = Base.PosAsny - Base.VelG
@@ -82,4 +88,5 @@ func _input(event):
 			Base.Vect = Vector3(0,Base.PosAsny,0)
 			Base._rot()
 		if Base.Bas == "W":
-			Base.Rott.rotate(Vector3(0,-1,0),deg2rad(11.25))
+			ry = Base.ry.get_global_transform()
+			Base.Rott.set_global_transform(ry)

@@ -34,7 +34,7 @@ var Alt = 50
 var AsnyPress
 var BasNode
 var f
-var ContF = -135
+var ContF = -120
 var ContF1 = 0
 var CFloor = 1
 var Vel
@@ -54,6 +54,8 @@ var NewScore = false
 var RX = 0
 var DN = -90
 onready var W = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/")
+var ry
+var ly
 
 onready var CameraI = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/Camera")
 
@@ -74,6 +76,8 @@ func ReloadS():
 	save_store()
 
 func _ready():
+	DN1 = abs(DN)
+	StoreP.set_global_transform(CameraI.get_node("StoreAsny").get_global_transform())
 #	CameraI.set_interpolation_enabled(true)
 #	Base.CameraI.set_target_path(str(Base.W,"/Spatial/"))
 	Asny = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Asny!ExportD")
@@ -85,7 +89,6 @@ func _ready():
 		_readyPlayer()
 	if get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/Control1/Button4").connect("pressed",self,"_VR"):
 		_VR()
-	
 	Sv()
 	SvSt()
 	print("384*216")
@@ -113,13 +116,16 @@ func _ChangeF():
 	PsPlyRt = str("/root/Ctrl/VBox/VpCtrl/Vport/World/F/AsnyControl/Control")
 
 var VRS = false
+var DN1 = 0
+var DN2 = 360
+var DN3 = 180
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_up"):
 		Base.Cancel
 	if press == false:
-		if Input.get_accelerometer().x >= 2:
-			Base._readyPlayer()
+#		if Input.get_accelerometer().x >= 2:
+#			Base._readyPlayer()
 		if Input.is_action_just_pressed("ui_accept"):
 			if Ctrl == "VR":
 				_readyPlayerVR()
@@ -134,20 +140,22 @@ func _process(delta):
 #		prints (ContF,round(f.get_rotation_degrees().x))
 		if round(f.get_rotation_degrees().x) <= ContF:
 			ContF -= 1
-#			prints(DN,ContF1)
+			prints(DN,round(ContF1))
 			if round(ContF1) == DN:
 				DN -= 90
-				if DN <= -270:
+				DN1 = abs(DN)
+				if DN1 >= DN3:
 					print("Dia")
 					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").show()
-					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").hide()				
-					if DN <= -360:
-						DN = 0
-						RX = 0
+					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").hide()
+					if DN1 >= DN2:
+						DN2 += 360
+						DN3 += 360
 				else:
 					print("Noche")
 					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").hide()
 					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").show()
+			print(DN1)
 			f.get_parent()._Spawn()
 		f.set_rotation_degrees(Vector3(ContF1,0,0))
 
@@ -240,6 +248,7 @@ func _readyPlayer():
 	targetAsny2 = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/ElAsny/Asny!ExportD")
 	AsnyCtrl.hide()
 	CameraI.set_interpolation_enabled(true)
+	StoreP.get_node("Bubble").set_emitting(false)
 #	if Bas == "R":
 #		BasNode._reload()
 #	if Bas == "H":

@@ -110,7 +110,7 @@ func _on_Recua_body_entered(body):
 		else:
 			_Down()
 		Base.Acc = false
-		get_node("/root/Ctrl/VBox/VpCtrl/Vport/MiniGameR").hide()
+		get_node("/root/Ctrl/VBox/VpCtrl/MiniGameR").hide()
 
 func _Down():
 	Base.PosPlayerAsny.set_translation(Vector3(0,50.75,0))
