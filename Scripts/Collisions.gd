@@ -127,7 +127,7 @@ func _Down():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	Base.Posi = get_node(Base.PosPlF).get_rotation_degrees().x
 	var PosiZ = Base.PosAsny
-	Base.BasNode = self
+	Base.BasNode = get_node(str("BlueMoon2/Obs"))
 #	body.get_parent().set_translation(Vector3(0,-5,0))
 	Base.PsPlyRt = str("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/BMW/BlueMoonW/Base/Spatial/Ctrl")
 	Base.target = get_node(Base.PsPlyRt).get_parent()

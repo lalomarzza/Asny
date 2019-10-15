@@ -20,7 +20,7 @@ func _on_Area_body_entered(body):
 			Base.CameraI.set_process(false)
 		if Base.Ctrl == "PL":
 			Base.AsnyCtrl.show()
-		if Base.Bas == "R" or Base.Bas == "H":
+		if Base.Bas == "R" or Base.Bas == "H" or Base.Bas == "W":
 			Base.BasNode._overG()
 			Base.BasNode._over()
 
@@ -31,4 +31,3 @@ func _quit():
 	get_parent().free()
 	Base.AsnyPress.get_parent().remove_child(Base.AsnyPress)
 	Base.StoreP.add_child(Base.AsnyPress)
-	

@@ -1,5 +1,4 @@
 extends Spatial
-
 #
 #func _on_SwipeDetector_swipe_ended(gesture):
 #	if gesture.get_direction()=="left"||gesture.get_direction()=="up_left"||gesture.get_direction()=="down_left":
@@ -28,7 +27,6 @@ var RT = 90
 var TW = -1.2
 var TH = 0
 
-
 func _ready():
 	Base.Rott = $Base/
 	Base.Rtto = $Base/Spatial
@@ -37,8 +35,8 @@ func _ready():
 	randomize()
 	for i in 8:
 		while PosW <= 330:
-			R1 = rand_range(PosW+randi()%10+15,PosW+randi()%25+35)
-			R2 = rand_range(R1,R1+15)
+			R1 = rand_range(PosW+randi()%45+55,PosW+randi()%45+55)
+			R2 = rand_range(R1,R1+30)
 			PosW = rand_range(R1,R2)
 			ObWh = ObW[0]
 			Ob = ObWh.instance()

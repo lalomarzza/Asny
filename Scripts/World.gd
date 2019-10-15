@@ -333,23 +333,23 @@ func _SpawnS():
 
 var Obbs
 var CObs = 8
-var BoolO
+var BoolO = true
 
 func _new():
-	match S:
-		NS:
-			if CkRnd == 2:
-				Rng1 = 3
-				Rng2 = 5
-				CObs = 8
-			if CkRnd == 1:
-				Rng1 = 1
-				Rng2 = 3
-				CObs = 8
-			else:
-				Rng1 = 1
-				Rng2 = 5
-				CObs = 4
+#	match S:
+#		NS:
+	if CkRnd == 2:
+		Rng1 = 3
+		Rng2 = 5
+		CObs = 8
+	elif CkRnd == 1:
+		Rng1 = 3
+		Rng2 = 5
+		CObs = 8
+	else:
+		Rng1 = 1
+		Rng2 = 5
+		CObs = 4
 	if BoolPw == 1:
 		if  ContOnPw <= RCantPw:
 			ContOnPw += 1
