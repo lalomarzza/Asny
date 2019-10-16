@@ -283,6 +283,10 @@ func _SpawnS():
 			else:
 				NewCk = get_node(str(S,"/C")).get_child(0).get_node("CorkM")
 			c+=1
+			if c >= 3 and c <=6:
+				ObsC = true
+			else:
+				ObsC = false
 			if c == 5:
 				NewC.set_translation(Vector3(0,51.5,0))
 				NewCk.add_child(NewC)
@@ -293,51 +297,71 @@ func _SpawnS():
 			if CkRnd == 1:
 				ObH += 1
 				CkRnd = 2
+				BoolM = false
 #				ContR += 1
 				ContH += 1
 				ContPlat += 1
 				RandRP = randi()%3+0
 				if ContH == 2:
 					CkRnd = 3
+					BoolM = true
 					ContH = 0
 			else:
 				CkRnd = 1
 #				ContR += 1
+				BoolM = false
 				ContH += 1
 				ContPlat += 1
 				RandRP = randi()%3+0
 				if ContH == 2:
 					CkRnd = 3
+					BoolM = true
 					ContH = 0
 			CkRndCn = 0
 			ObH = 51
 			ObR = -1
 		ContCkPos += 6
-	if ContMn == ContMnPos:
-		Mn1 = get_node(str(S,"/M")).get_child(0).get_node("Mntn")
-		if BoolM == true:
-			SpawnMn1 = CkRv.instance()
-			Mn1.add_child(SpawnMn1)
+	if BoolM == true:
+		CntR += 1
+		if CntR == 5:
+			if ContMn == ContMnPos-5:
+				BoolO = false
+			if ContMn == ContMnPos:
+				Mn1 = get_node(str(S,"/M")).get_child(0).get_node("Mntn")
+				SpawnMn1 = CkRv.instance()
+				Mn1.add_child(SpawnMn1)
+				ContMnPos += 12
+				BoolO = true
+			CntR = 0
 		else:
+			if ContMn == ContMnPos:
+				Mn1 = get_node(str(S,"/M")).get_child(0).get_node("Mntn")
+				SpawnMn1 = M1.instance()
+				Mn1.add_child(SpawnMn1)
+				SpawnMn2 = M2.instance()
+				Mn1.add_child(SpawnMn2)
+				ContMnPos += 12
+	else:
+		if ContMn == ContMnPos:
+			Mn1 = get_node(str(S,"/M")).get_child(0).get_node("Mntn")
 			SpawnMn1 = M1.instance()
 			Mn1.add_child(SpawnMn1)
 			SpawnMn2 = M2.instance()
 			Mn1.add_child(SpawnMn2)
-		ContMnPos += 12
+			ContMnPos += 12
 	if S == ContSpawn:
 		ContSpawn += 360
 		n = 0
 		m = 0
-	NS = S
 	_new()
 
+var CntR = 0
 var Obbs
 var CObs = 8
 var BoolO = true
+var ObsC
 
 func _new():
-#	match S:
-#		NS:
 	if CkRnd == 2:
 		Rng1 = 3
 		Rng2 = 5
@@ -352,12 +376,16 @@ func _new():
 		CObs = 4
 	if BoolPw == 1:
 		if  ContOnPw <= RCantPw:
-			ContOnPw += 1
-			Pw = Power[randi()%Power.size()]
-			SpawnPw = Pw.instance()
-			get_node(str(S,"/O")).get_child(0).get_node(str(RPosHPw)).add_child(SpawnPw)
-			while RPosHObs == RPosHPw:
-				RPosHObs = int(rand_range(Rng1,Rng2))
+			if BoolO == true:
+				ContOnPw += 1
+				Pw = Power[randi()%Power.size()]
+				SpawnPw = Pw.instance()
+				get_node(str(S,"/O")).get_child(0).get_node(str(RPosHPw)).add_child(SpawnPw)
+				while RPosHObs == RPosHPw:
+					RPosHObs = int(rand_range(Rng1,Rng2))
+				if ObsC == true:
+					while RPosHObs <= 2 and RPosHObs >= 4:
+						RPosHObs = int(rand_range(Rng1,Rng2))
 		else:
 			ContPw = 0
 			ContOnPw = 0
