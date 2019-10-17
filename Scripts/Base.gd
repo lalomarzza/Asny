@@ -255,6 +255,7 @@ func _readyPlayer():
 #		BasNode._reload()
 
 var VRF
+var CW = 0
 
 func _VR():
 	get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/").hide()

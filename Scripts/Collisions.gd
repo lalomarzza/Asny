@@ -42,7 +42,6 @@ func _on_AreaI_body_entered(body):
 		Base.Alt = get_translation().y
 		get_node(Base.PsPlyRt).set_translation(Vector3(0,Base.Alt,0))
 		ID = "I"
-		
 
 func _on_AreaD_body_entered(body):
 	if body.is_in_group("Detect"):
@@ -127,8 +126,9 @@ func _Down():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	Base.Posi = get_node(Base.PosPlF).get_rotation_degrees().x
 	var PosiZ = Base.PosAsny
-	Base.BasNode = get_node(str("BlueMoon2/Obs"))
+	Base.BasNode = get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/BMW/BlueMoonW")
 #	body.get_parent().set_translation(Vector3(0,-5,0))
+	Base.BasNode._enter()
 	Base.PsPlyRt = str("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/BMW/BlueMoonW/Base/Spatial/Ctrl")
 	Base.target = get_node(Base.PsPlyRt).get_parent()
 	Base.VelG = 1.25
@@ -140,6 +140,14 @@ func _on_Game_body_entered(body):
 	Base.VelZ = 3
 	get_node("/root/Ctrl/VBox/VpCtrl/MiniGameR")._Game()
 	get_node("/root/Ctrl/VBox/VpCtrl/MiniGameR").show()
+	if ID == "I":
+		Base.Vect = Vector3(0,0,.075)
+		Base._rot()
+		Base.PosAsny = .075
+	if ID == "D":
+		Base.Vect = Vector3(0,0,-.075)
+		Base._rot()
+		Base.PosAsny = -.075
 
 func Detect():
 	Base.PosPlayerAsny.set_translation(Vector3(0,50.75,0))

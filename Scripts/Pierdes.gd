@@ -3,26 +3,60 @@ extends Area
 var Posi
 
 func _on_Area_body_entered(body):
-	if body.is_in_group("Asny"):
-		Base.W.get_node("FX")._set_playing(true)
-		Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
-		Base.press = false
-		Base.ContF1 += 5
-		Base._musicAsnyStop()
-		get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").set_text(str(Base.data["Diamond"]))
-		get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").show()
-		Base.StoreP.set_global_transform(Base.CameraI.get_node("StoreAsny").get_global_transform())
-		call_deferred("_quit")
-		Base.StoreP.get_node("Bubble").set_emitting(true)
-		if Base.Ctrl == "VR":
-			Base.VRF.Strt = false
-			get_tree().call_group("Node2D","show")
-			Base.CameraI.set_process(false)
-		if Base.Ctrl == "PL":
-			Base.AsnyCtrl.show()
-		if Base.Bas == "R" or Base.Bas == "H" or Base.Bas == "W":
-			Base.BasNode._overG()
-			Base.BasNode._over()
+	if Base.Bas == "R" or Base.Bas == "H" or Base.Bas == "F":
+		if body.is_in_group("Asny"):
+			Base.W.get_node("FX")._set_playing(true)
+			Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
+			Base.press = false
+			Base.ContF1 += 5
+			Base._musicAsnyStop()
+			get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").set_text(str(Base.data["Diamond"]))
+			get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").show()
+			Base.StoreP.set_global_transform(Base.CameraI.get_node("StoreAsny").get_global_transform())
+			call_deferred("_quit")
+			Base.StoreP.get_node("Bubble").set_emitting(true)
+			if Base.Ctrl == "VR":
+				Base.VRF.Strt = false
+				get_tree().call_group("Node2D","show")
+				Base.CameraI.set_process(false)
+			if Base.Ctrl == "PL":
+				Base.AsnyCtrl.show()
+			if Base.Bas == "R" or Base.Bas == "H":
+				Base.BasNode._overG()
+				Base.BasNode._over()
+	if Base.Bas == "W":
+		if body.is_in_group("Asny"):
+			print(Base.CW)
+			if Base.CW == 1:
+				var PosiZ = Base.PosAsny
+				Base.BasNode = get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/BMW/BlueMoonW")
+			#	body.get_parent().set_translation(Vector3(0,-5,0))
+#				Base.BasNode._enter()
+#				Base.PsPlyRt = str("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/BMW/BlueMoonW/Base/Spatial/Ctrl")
+#				Base.target = get_node(Base.PsPlyRt).get_parent()
+#				Base.VelG = 1.25
+#				Base.Bas = "W"
+#				Base.VelZ = 0
+##				Base.W.get_node("FX")._set_playing(true)
+##				Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
+##				Base.press = false
+##				Base.ContF1 += 5
+##				Base._musicAsnyStop()
+##				get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").set_text(str(Base.data["Diamond"]))
+##				get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").show()
+##				Base.StoreP.set_global_transform(Base.CameraI.get_node("StoreAsny").get_global_transform())
+##				call_deferred("_quit")
+##				Base.StoreP.get_node("Bubble").set_emitting(true)
+##				if Base.Ctrl == "VR":
+##					Base.VRF.Strt = false
+##					get_tree().call_group("Node2D","show")
+##					Base.CameraI.set_process(false)
+##				if Base.Ctrl == "PL":
+##					Base.AsnyCtrl.show()
+				Base.BasNode._overG()
+				Base.BasNode._over()
+				Base.CW = 0
+			Base.CW += 1
 
 func _quit():
 	if Base.Ctrl == "VR":

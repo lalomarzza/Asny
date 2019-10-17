@@ -324,7 +324,7 @@ func _SpawnS():
 	if BoolM == true:
 		CntR += 1
 		if CntR == 5:
-			if ContMn == ContMnPos-5:
+			if ContMn == ContMnPos:
 				BoolO = false
 			if ContMn == ContMnPos:
 				Mn1 = get_node(str(S,"/M")).get_child(0).get_node("Mntn")
