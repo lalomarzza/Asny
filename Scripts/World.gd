@@ -147,6 +147,9 @@ func _ready():
 	rot = self.get_rotation_degrees().x
 	_Start()
 
+var NewMv = 180
+var DicMv = {}
+
 func _Start():
 	RPosCntPw = randi()%20+15
 	RandObs = randi()%2+1
@@ -208,6 +211,8 @@ func _SpawnS():
 					SpawnCk.set_translation(Vector3(0,ObH,0))
 					Ck = get_node(str(S,"/L")).get_child(0).get_node("CorkD")
 					Ck.add_child(SpawnCk)
+					DicMv[S] = str(abs(S))
+					print(DicMv[S])
 				else:
 					SpawnCk = CH.instance()
 					SpawnCk.set_translation(Vector3(0,ObH,0))
@@ -403,3 +408,8 @@ func _new():
 			SpawnOb.set_rotation_degrees(Vector3(0,randi()%365,0))
 			get_node(str(S,"/O")).get_child(0).get_node(str(RPosHObs)).add_child(SpawnOb)
 			ContOnOb = 0
+
+var ObMv = 0
+
+func _Mov():
+	ObMv += 1
