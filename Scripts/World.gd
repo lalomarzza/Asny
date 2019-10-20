@@ -134,11 +134,11 @@ func _ready():
 	Base.RX = randi()%4
 	print(Base.RX)
 	Base.DN = -((Base.RX*90)+90)
-	if Base.DN1 >= 180:
+	if Base.DN1 >= 90:
 		print("Dia")
 		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").show()
 		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").hide()
-	else:
+	if Base.DN1:
 		print("Noche")
 		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").hide()
 		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").show()
@@ -195,17 +195,16 @@ func _SpawnS():
 	if ContCk == ContCkPos:
 		CkRndCn += 1
 		if CkRnd == 1:
+			print(abs(-((Base.RX*90)+S)),"n")
 			SpawnCk = CD.instance()
 			if CkRndCn == 4:
 				ContR += 1
 				if ContR == 5:
 					lasso = CR[0]#randi()%2]
-					if Base.DN == 0 || Base.DN == -270:
-						print("Dia")
+					if abs(-((Base.RX*90)+S)) >= 0 && abs(-((Base.RX*90)+S)) <= 270:
+						pass
 					else:
-						print("Noche")
 						lasso = CR[2]
-						print("Recua")
 					SpawnCk = lasso.instance()
 					ContR = 0
 					SpawnCk.set_translation(Vector3(0,ObH,0))
@@ -215,6 +214,7 @@ func _SpawnS():
 					print(DicMv[S])
 				else:
 					SpawnCk = CH.instance()
+					SpawnCk.set_name(str(S,"C"))
 					SpawnCk.set_translation(Vector3(0,ObH,0))
 					Ck = get_node(str(S,"/C")).get_child(0).get_node("CorkD")
 					Ck.add_child(SpawnCk)
@@ -232,6 +232,7 @@ func _SpawnS():
 				SpawnCk.set_translation(Vector3(0,float(ObH),0))
 				Ck = get_node(str(S,"/C")).get_child(0).get_node("CorkD")
 				Ck.add_child(SpawnCk)
+				SpawnCk.set_name(str(S,"CD"))
 				Treee = Obs2[randi()%Obs2.size()]
 				SpawnTree = Treee.instance()
 				SpawnCk.get_node(str(randi()%2+1)).add_child(SpawnTree)
@@ -247,13 +248,12 @@ func _SpawnS():
 				ContR += 1
 				if ContR == 5:
 					lasso = CR[0]#randi()%1]
-					if Base.DN == 0 || Base.DN == -270:
-						print("Dia")
+					if abs(-((Base.RX*90)+S)) >= 0 && abs(-((Base.RX*90)+S)) <= 270:
+						pass
 					else:
-						print("Noche")
 						lasso = CR[2]
-						print("Recua")
 					SpawnCk = lasso.instance()
+					SpawnCk.set_name(str(S,"CD"))
 					SpawnCk.set_translation(Vector3(0,float(ObH),0))
 					Ck = get_node(str(S,"/L")).get_child(0).get_node("CorkI")
 					Ck.add_child(SpawnCk)
@@ -385,6 +385,7 @@ func _new():
 				ContOnPw += 1
 				Pw = Power[randi()%Power.size()]
 				SpawnPw = Pw.instance()
+				SpawnPw.set_name(str(S,"P"))
 				get_node(str(S,"/O")).get_child(0).get_node(str(RPosHPw)).add_child(SpawnPw)
 				while RPosHObs == RPosHPw:
 					RPosHObs = int(rand_range(Rng1,Rng2))
@@ -405,6 +406,7 @@ func _new():
 		if BoolO == true:
 			Obbs = Obs[randi()%Obs.size()]
 			SpawnOb = Obbs.instance()
+			SpawnOb.set_name(str(S,"O"))
 			SpawnOb.set_rotation_degrees(Vector3(0,randi()%365,0))
 			get_node(str(S,"/O")).get_child(0).get_node(str(RPosHObs)).add_child(SpawnOb)
 			ContOnOb = 0

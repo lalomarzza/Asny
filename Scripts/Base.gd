@@ -140,22 +140,18 @@ func _process(delta):
 #		prints (ContF,round(f.get_rotation_degrees().x))
 		if round(f.get_rotation_degrees().x) <= ContF:
 			ContF -= 1
-			prints(DN,round(ContF1))
 			if round(ContF1) == DN:
 				DN -= 90
 				DN1 = abs(DN)
 				if DN1 >= DN3:
-					print("Dia")
 					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").show()
 					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").hide()
 					if DN1 >= DN2:
 						DN2 += 360
 						DN3 += 360
 				else:
-					print("Noche")
 					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").hide()
 					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").show()
-			print(DN1)
 			f.get_parent()._Spawn()
 		f.set_rotation_degrees(Vector3(ContF1,0,0))
 

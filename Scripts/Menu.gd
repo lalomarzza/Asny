@@ -2,27 +2,40 @@ extends TextureRect
 
 var AsnyReady = preload("res://Scenes/AsnyPlayer.scn")
 var AsnyHat = preload("res://Scenes/ObjectSingle/Store/Hat.scn")
-
 var Music = true
 var Sound = true
 var Hat = true
-var AsnyPress
-var AsnyPressHat
+
 
 var MR = [preload("res://Materials/ClothL.material"),
 preload("res://Materials/MetallicL.material"),
 preload("res://Materials/PapperL.material"),
 preload("res://Materials/PlasticL.material"),
 preload("res://Materials/CorkL.material"),
-preload("res://Materials/WatherL.material")
+preload("res://Materials/WatherL.material"),
+preload("res://Materials/TransparentL.material"),
+preload("res://Materials/ClothL.material"),
+preload("res://Materials/PapperL.material"),
+preload("res://Materials/PlasticL.material"),
+preload("res://Materials/CorkL.material"),
+preload("res://Materials/TransparentL.material")
 ]
+
+var AsnyPress
+var AsnyPressHat
 
 var MRD = [preload("res://Materials/Cloth.material"),
 preload("res://Materials/Metallic.material"),
 preload("res://Materials/Papper.material"),
 preload("res://Materials/Plastic.material"),
 preload("res://Materials/Cork.material"),
-preload("res://Materials/Wather.material")
+preload("res://Materials/Wather.material"),
+preload("res://Materials/Transparent.material"),
+preload("res://Materials/Cloth.material"),
+preload("res://Materials/Papper.material"),
+preload("res://Materials/Plastic.material"),
+preload("res://Materials/Cork.material"),
+preload("res://Materials/Transparent.material")
 ]
 
 onready var tween = $Control2/Tween
@@ -194,12 +207,16 @@ func _on_R_button_down():
 func _on_R_button_up():
 	_Cancel()
 
+var C = 0
+
 func _on_Button7_button_up():
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/").set_size(Vector2(162,288))#216,384))
-#	get_parent().set_scale(Vector2(.2,.2))
+	C = 0
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/").set_size(Vector2(162,288))
 	for m in MR.size():
 		for i in get_tree().get_nodes_in_group(str(m)):
-			i.set_surface_material(0,MR[m])
+			if m >= 7 && C == 0:
+				C += 1
+			i.set_surface_material(C,MR[m])
 	get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/MultiMeshInstance").set_material_override(MR[3])
 #	get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/").set_material_override(MR[4])
 	$Control1/Button7.hide()
@@ -209,11 +226,13 @@ func _Change():
 	print("Hola")
 
 func _on_Button7R_button_down():
+	C = 0
 	get_node("/root/Ctrl/VBox/VpCtrl/Vport/").set_size(Vector2(1080,1920))
-#	get_parent().set_scale(Vector2(1,1))
 	for m in MRD.size():
 		for i in get_tree().get_nodes_in_group(str(m)):
-			i.set_surface_material(0,MRD[m])
+			if m >= 7 && C == 0:
+				C += 1
+			i.set_surface_material(C,MRD[m])
 	get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/MultiMeshInstance").set_material_override(MRD[3])
 	$Control1/Button7.show()
 	$Control1/Button7R.hide()
