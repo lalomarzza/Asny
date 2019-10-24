@@ -9,6 +9,7 @@ func _on_Area_body_entered(body):
 			Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
 			Base.press = false
 			Base.ContF1 += 5
+			_Screen()
 			Base._musicAsnyStop()
 			get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").set_text(str(Base.data["Diamond"]))
 			get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").show()
@@ -42,3 +43,14 @@ func _quit():
 	get_parent().free()
 	Base.AsnyPress.get_parent().remove_child(Base.AsnyPress)
 	Base.StoreP.add_child(Base.AsnyPress)
+
+func _Screen():
+	get_viewport().set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	var img = get_viewport().get_texture().get_data()
+	img.flip_y()
+	var tex = ImageTexture.new()
+	tex.create_from_image(img)
+	Base.W.get_node("capture").set_texture(tex)
+	print("hi")

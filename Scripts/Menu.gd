@@ -208,6 +208,11 @@ func _on_R_button_up():
 	_Cancel()
 
 var C = 0
+var MT
+
+class New:
+	extends Resource
+	var check = 0
 
 func _on_Button7_button_up():
 	C = 0
@@ -218,6 +223,8 @@ func _on_Button7_button_up():
 				C += 1
 			i.set_surface_material(C,MR[m])
 	get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/MultiMeshInstance").set_material_override(MR[3])
+#	MT = Material.new()
+#	ResourceSaver.save("res://Blend/AsnyPlayer.tres", MT)
 #	get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/").set_material_override(MR[4])
 	$Control1/Button7.hide()
 	$Control1/Button7R.show()

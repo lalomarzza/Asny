@@ -133,16 +133,16 @@ func _ready():
 	randomize()
 	Base.RX = randi()%4
 	print(Base.RX)
-	Base.DN = -((Base.RX*90)+90)
-	if Base.DN1 >= 90:
+	Base.DN = -(Base.RX*90)
+	if abs(Base.DN) == 180 || abs(Base.DN) == 270:
 		print("Dia")
 		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").show()
 		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").hide()
-	if Base.DN1:
+	else:
 		print("Noche")
 		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").hide()
 		get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").show()
-	print(Base.DN)
+	print(abs(Base.DN))
 	self.rotate(Vector3(1,0,0),rad2deg(Base.RX*90))
 	rot = self.get_rotation_degrees().x
 	_Start()
@@ -200,11 +200,12 @@ func _SpawnS():
 			if CkRndCn == 4:
 				ContR += 1
 				if ContR == 5:
-					lasso = CR[0]#randi()%2]
-					if abs(-((Base.RX*90)+S)) >= 0 && abs(-((Base.RX*90)+S)) <= 270:
+					lasso = CR[2]#randi()%2]
+					print(abs(-((Base.RX*90)+S)),"nnnnn")
+					if abs(-((Base.RX*90)+S)) >= 180 && abs(-((Base.RX*90)+S)) <= 270:
 						pass
 					else:
-						lasso = CR[2]
+						lasso = CR[randi()%1]
 					SpawnCk = lasso.instance()
 					ContR = 0
 					SpawnCk.set_translation(Vector3(0,ObH,0))
