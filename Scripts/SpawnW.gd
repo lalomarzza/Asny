@@ -1,18 +1,18 @@
 extends Spatial
 
-const ObW = [preload("res://Scenes/ObjectSingle/Octopus.scn"),
-preload("res://Scenes/ObjectSingle/LowPolyRockW.scn"),
-preload("res://Scenes/ObjectSingle/LowPolyRockW.scn"),
-preload("res://Scenes/ObjectSingle/LowPolyRockW.scn"),
-preload("res://Scenes/ObjectSingle/LowPolyRockW.scn")]
+const ObW = [preload("res://Scenes/ObjectSingle/N/Octopus.scn"),
+preload("res://Scenes/ObjectSingle/N/LowPolyRockW.scn"),
+preload("res://Scenes/ObjectSingle/N/LowPolyRockW.scn"),
+preload("res://Scenes/ObjectSingle/N/LowPolyRockW.scn"),
+preload("res://Scenes/ObjectSingle/N/LowPolyRockW.scn")]
 
-const Power = [preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Ruby.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn")]
+const Power = [preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Ruby.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn")]
 
 var O1
 var O2

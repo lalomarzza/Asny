@@ -42,10 +42,6 @@ onready var tween = $Control2/Tween
 
 var Trans = false
 
-func _process(delta):
-#	$Label.set_text(str(Input.get_accelerometer
-	pass
-
 func _on_Music_pressed():
 	var Menu = get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/Control1/Music")
 	if Music == true:
@@ -60,8 +56,6 @@ func _on_Music_pressed():
 		Menu.get_child(1).hide()
 		Music = true
 		Base._musicAsnyON()
-	
-
 
 func _on_Sound_pressed():
 	var Menu = get_node("/root/Ctrl/VBox/VpCtrl/Vport/Control/Menu/Control1/Sound")
@@ -99,24 +93,6 @@ func _on_StoreR_pressed():
 	ResourceSaver.save("res://Scenes/AsnyPlayer.scn", packed_scene)
 	Base.save_store()
 	Base.CameraI.set_target(Base.W.get_node("AsnyPlayer/Spatial"))
-
-func _Shop():
-	
-	pass
-
-#func _on_Hat_pressed():
-#	Base._Hat()
-#
-#func _on_Store_pressed():
-#	Base.LoadAsnySt()
-#	get_node("Control1").hide()
-#	get_node("Control2").show()
-#
-#func _on_StoreR_pressed():
-#	get_node("Control2").hide()
-#	get_node("Control1").show()
-#	Base._ResSv()
-#
 
 func _on_TimerDiamond_timeout():
 	get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").hide()
@@ -177,8 +153,8 @@ func _on_Tween_tween_completed(object, key):
 	Base.save_store()
 	Base.save_data()
 
-var Bullet = preload("res://Scenes/ObjectSingle/RocketB.scn")
-var BulletR = preload("res://Scenes/ObjectSingle/RocketR.scn")
+var Bullet = preload("res://Scenes/ObjectSingle/N/RocketB.scn")
+var BulletR = preload("res://Scenes/ObjectSingle/N/RocketR.scn")
 var RB
 
 func _on_R_button_down():
@@ -208,24 +184,16 @@ func _on_R_button_up():
 	_Cancel()
 
 var C = 0
-var MT
-
-class New:
-	extends Resource
-	var check = 0
 
 func _on_Button7_button_up():
 	C = 0
-	get_node("/root/Ctrl/VBox/VpCtrl/Vport/").set_size(Vector2(162,288))
+	get_node("/root/Ctrl/VBox/VpCtrl/Vport/").set_size(Vector2(140,248))
 	for m in MR.size():
 		for i in get_tree().get_nodes_in_group(str(m)):
 			if m >= 7 && C == 0:
 				C += 1
 			i.set_surface_material(C,MR[m])
 	get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/MultiMeshInstance").set_material_override(MR[3])
-#	MT = Material.new()
-#	ResourceSaver.save("res://Blend/AsnyPlayer.tres", MT)
-#	get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/").set_material_override(MR[4])
 	$Control1/Button7.hide()
 	$Control1/Button7R.show()
 

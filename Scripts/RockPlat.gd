@@ -1,12 +1,12 @@
 extends MeshInstance
 
-const Power = [preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Ruby.scn")]
+const Power = [preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Ruby.scn")]
 
 var Pw
 var SpawnPw

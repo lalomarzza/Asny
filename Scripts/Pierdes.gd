@@ -22,6 +22,7 @@ func _on_Area_body_entered(body):
 				Base.CameraI.set_process(false)
 			if Base.Ctrl == "PL":
 				Base.AsnyCtrl.show()
+				Base.CtrlTrue.free()
 			if Base.Bas == "R" or Base.Bas == "H":
 				Base.BasNode._overG()
 				Base.BasNode._over()
@@ -37,9 +38,6 @@ func _on_Area_body_entered(body):
 			Base.CW += 1
 
 func _quit():
-	if Base.Ctrl == "VR":
-		get_node("/root/Ctrl/VBox/VpCtrl/Control").free()
-	Base.CtrlTrue.free()
 	get_parent().free()
 	Base.AsnyPress.get_parent().remove_child(Base.AsnyPress)
 	Base.StoreP.add_child(Base.AsnyPress)

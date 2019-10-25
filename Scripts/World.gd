@@ -36,35 +36,38 @@ extends Spatial
 #			$Terrain.add_child(SpwTr)
 #		num1 += 30
 
-const Power = [preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn")]
+const Power = [preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn")]
 
-#var Dm = preload("res://Scenes/ObjectSingle/Ruby.scn")
+const Obs = [preload("res://Scenes/ObjectSingle/N/R1.scn"),
+preload("res://Scenes/ObjectSingle/N/R1.scn"),
+preload("res://Scenes/ObjectSingle/N/Tree.scn")]
 
-const Obs = [preload("res://Scenes/ObjectSingle/R1.scn"),
-preload("res://Scenes/ObjectSingle/R1.scn"),
-preload("res://Scenes/ObjectSingle/Tree.scn")]
+const Obs2 = [preload("res://Scenes/ObjectSingle/N/Pine.scn"),
+preload("res://Scenes/ObjectSingle/N/Tree.scn"),
+preload("res://Scenes/ObjectSingle/N/Tree.scn"),
+preload("res://Scenes/ObjectSingle/N/Tree.scn")]
 
-const Obs2 = [preload("res://Scenes/ObjectSingle/Pine.scn"),
-preload("res://Scenes/ObjectSingle/Tree.scn"),
-preload("res://Scenes/ObjectSingle/Tree.scn"),
-preload("res://Scenes/ObjectSingle/Tree.scn")]
+var M1 = preload("res://Scenes/ObjectSingle/N/MntD.scn")
+var M2 = preload("res://Scenes/ObjectSingle/N/MntI.scn")
 
-var M1 = preload("res://Scenes/ObjectSingle/MntD.scn")
-var M2 = preload("res://Scenes/ObjectSingle/MntI.scn")
+var CD = preload("res://Scenes/ObjectSingle/N/CorkNClothD.scn")
+var CI = preload("res://Scenes/ObjectSingle/N/CorkNClothI.scn")
 
-var CD = preload("res://Scenes/ObjectSingle/CorkNClothD.scn")
-var CI = preload("res://Scenes/ObjectSingle/CorkNClothI.scn")
-var CR = [preload("res://Scenes/ObjectSingle/Hose1.scn"),
-preload("res://Scenes/ObjectSingle/Lasso.scn"),
-preload("res://Scenes/ObjectSingle/RecuaNCork.scn")
-]
-var CH = preload("res://Scenes/ObjectSingle/Hill1.scn")
-var Plat = preload("res://Scenes/ObjectSingle/Platform.scn")
-const WT = [preload("res://Scenes/ObjectSingle/HHA.scn"),
-preload("res://Scenes/ObjectSingle/Pig.scn")]
-var Ramp = preload("res://Scenes/ObjectSingle/Ramp.scn")
-var CkRv = preload("res://Scenes/ObjectSingle/CorkRiver.scn")
+var CR = [preload("res://Scenes/ObjectSingle/N/Hose1.scn"),
+preload("res://Scenes/ObjectSingle/N/Lasso.scn"),
+preload("res://Scenes/ObjectSingle/N/RecuaNCork.scn")]
+
+var CH = preload("res://Scenes/ObjectSingle/N/Hill1.scn")
+
+var Plat = preload("res://Scenes/ObjectSingle/N/Platform.scn")
+
+const WT = [preload("res://Scenes/ObjectSingle/N/HHA.scn"),
+preload("res://Scenes/ObjectSingle/N/Pig.scn")]
+
+var Ramp = preload("res://Scenes/ObjectSingle/N/Ramp.scn")
+
+var CkRv = preload("res://Scenes/ObjectSingle/N/CorkRiver.scn")
 
 var Floor = preload("res://Scenes/FloorU.scn")
 

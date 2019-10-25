@@ -252,17 +252,16 @@ func _readyPlayer():
 
 var VRF
 var CW = 0
+var CtrlTrue
 
 func _VR():
 	get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/").hide()
 	get_node("/root/Ctrl/VBox/VpCtrl/Control/VR/").show()
-	_CtrlVR()
-#	W.get_node("AsnyPlayer/Spatial").set_rotation_degrees(Vector3(0,-90,90))
-	
+	CtrlTrue = ControlAsnyVR.instance()
+	get_node("/root/Ctrl/VBox/").add_child(CtrlTrue)
+	Ctrl = "VR"
 
 func _readyPlayerVR():
-	get_tree().call_group("Node2D","hide")
-#	W.get_node("AsnyPlayer/ElAsny").mode(0)
 	Cong = 0
 	if Bas == "F":
 		VelG = .005
@@ -287,17 +286,9 @@ func _readyPlayerVR():
 	if Bas == "H":
 		BasNode._reload()
 
-var CtrlTrue
-
 func _Ctrl():
 	CtrlTrue = ControlAsny.instance()
 	get_node("/root/Ctrl/VBox/VpCtrl").add_child(CtrlTrue)
-
-func _CtrlVR():
-	var CtrlTrue = ControlAsnyVR.instance()
-	get_node("/root/Ctrl/VBox/").add_child(CtrlTrue)
-	Ctrl = "VR"
-	get_tree().call_group("Node2D","show")
 
 func _musicAsnyON():
 	get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyMusic/").set_stream_paused(false)

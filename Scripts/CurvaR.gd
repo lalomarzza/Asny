@@ -1,19 +1,19 @@
 extends Spatial
 
-const Power = [preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Ruby.scn")]
+const Power = [preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Ruby.scn")]
 
-var Dm = preload("res://Scenes/ObjectSingle/Thunder.scn")
+var Dm = preload("res://Scenes/ObjectSingle/N/Thunder.scn")
 
-const Obs = [preload("res://Scenes/ObjectSingle/Desert1.scn"),
-preload("res://Scenes/ObjectSingle/Desert1.scn"),
-preload("res://Scenes/ObjectSingle/Desert2.scn"),
-preload("res://Scenes/ObjectSingle/Desert2.scn"),
-preload("res://Scenes/ObjectSingle/Desert3.scn")]
+const Obs = [preload("res://Scenes/ObjectSingle/N/Desert1.scn"),
+preload("res://Scenes/ObjectSingle/N/Desert1.scn"),
+preload("res://Scenes/ObjectSingle/N/Desert2.scn"),
+preload("res://Scenes/ObjectSingle/N/Desert2.scn"),
+preload("res://Scenes/ObjectSingle/N/Desert3.scn")]
 
 var RPosCntPw = 0
 var RCantPw = 0

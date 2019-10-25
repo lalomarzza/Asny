@@ -1,9 +1,9 @@
 extends Spatial
 
-const Trees = [preload("res://Scenes/ObjectSingle/T1.scn"),
-preload("res://Scenes/ObjectSingle/T1.scn"),
-preload("res://Scenes/ObjectSingle/T1.scn"),
-preload("res://Scenes/ObjectSingle/P1.scn")
+const Trees = [preload("res://Scenes/ObjectSingle/N/T1.scn"),
+preload("res://Scenes/ObjectSingle/N/T1.scn"),
+preload("res://Scenes/ObjectSingle/N/T1.scn"),
+preload("res://Scenes/ObjectSingle/N/P1.scn")
 ]
 
 var CnMn = 1

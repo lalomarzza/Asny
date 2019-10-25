@@ -19,7 +19,6 @@ func _ready():
 var Cont = 0
 
 func _process(delta):
-	
 	if Engine.is_editor_hint() == false:
 		if Strt == true:
 			Base.targetAsny.global_transform = Base.targetAsny.global_transform.interpolate_with(Base.PosPlayer,delta*Follow_Speed)
@@ -56,51 +55,18 @@ func _process(delta):
 				if Input.get_accelerometer().x <= 0:
 					TF = true
 			else:
-				if Input.get_accelerometer().z >= 2:
+				if Input.get_accelerometer().z <= -2 || Input.is_action_just_pressed("ui_cancel"):
+					Base.CameraI.set_interpolation_enabled(true)
+#					Base.VRF = self
+					OS.set_screen_orientation(1)
+					OS.set_window_size(Vector2(600,1024))
+					call_deferred("_return")
+				if Input.get_accelerometer().z >= 2 or Input.is_action_just_pressed("ui_accept"):
 					Strt = true
 					Base._readyPlayerVR()
-	else:
-		if Strt == true:
-			Base.targetAsny.global_transform = Base.targetAsny.global_transform.interpolate_with(Base.PosPlayer,delta*Follow_Speed)
-	#		Cont += 1
-	#		Vect = Vector3(0,0,Input.get_accelerometer().z)
-	#		Base.target.set_rotation(Vect)
-			if Input.is_action_just_pressed("ui_left"):
-				Base.Ult = Base.PosAsny
-				Base.PosAsny = Base.PosAsny + Base.VelG
-				if Base.Bas == "F":
-					if Base.PosAsny >= 0.1:
-						Base.PosAsny = 0.1
-					Base.Vect = Vector3(0,0,Base.PosAsny)
-					Base.targetAsny2.get_node("AnimationPlayer").play("Derecha")
-					Base._rot()
-				if Base.Bas == "R":
-					Base.Vect = Vector3(0,0,Base.PosAsny)
-					Base.targetAsny2.get_node("AnimationPlayer").play("Derecha")
-					Base._rot()
-				if Base.Bas == "H":
-					Base.Vect = Vector3(0,Base.PosAsny,0)
-					Base._rot()
-				if Base.Bas == "W":
-					Base.Rott.rotate(Vector3(0,1,0),deg2rad(11.25))
-			if Input.is_action_just_pressed("ui_right"):
-				Base.Ult = Base.PosAsny
-				Base.PosAsny = Base.PosAsny - Base.VelG
-				if Base.Bas == "F":
-					if Base.PosAsny <= -0.1:
-						Base.PosAsny = -0.1
-					Base.Vect = Vector3(0,0,Base.PosAsny)
-					Base.targetAsny2.get_node("AnimationPlayer").play("Izquierda")
-					Base._rot()
-				if Base.Bas == "R":
-					Base.targetAsny2.get_node("AnimationPlayer").play("Izquierda")
-					Base.Vect = Vector3(0,0,Base.PosAsny)
-					Base._rot()
-				if Base.Bas == "H":
-					Base.Vect = Vector3(0,Base.PosAsny,0)
-					Base._rot()
-				if Base.Bas == "W":
-					Base.Rott.rotate(Vector3(0,-1,0),deg2rad(11.25))
-		else:
-			if Input.is_action_just_pressed("ui_accept"):
-				TF = true
+
+func _return():
+	get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/").show()
+	get_node("/root/Ctrl/VBox/VpCtrl/Control/VR/").hide()
+	Base.CtrlTrue.queue_free()
+	Base.Ctrl = "PL"

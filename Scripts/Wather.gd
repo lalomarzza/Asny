@@ -1,6 +1,6 @@
 extends Spatial
 
-const ObW = [preload("res://Scenes/ObjectSingle/ObW.scn")]
+const ObW = [preload("res://Scenes/ObjectSingle/N/ObW.scn")]
 var ObWh
 var Ob
 var PosW = 1

@@ -1,19 +1,19 @@
 extends Spatial
 
-const Power = [preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Ruby.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn"),
-preload("res://Scenes/ObjectSingle/Coin.scn")]
+const Power = [preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Ruby.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn"),
+preload("res://Scenes/ObjectSingle/N/Coin.scn")]
 
-const Obs = [preload("res://Scenes/ObjectSingle/ObjH1.scn"),
-preload("res://Scenes/ObjectSingle/ObjH1.scn")]
+const Obs = [preload("res://Scenes/ObjectSingle/N/ObjH1.scn"),
+preload("res://Scenes/ObjectSingle/N/ObjH1.scn")]
 
 var RPosCntPw = 0
 var RCantPw = 0
