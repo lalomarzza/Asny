@@ -182,13 +182,6 @@ func _SpawnS():
 	SpawnFloor = Floor.instance()
 	SpawnFloor.set_name(str(S))
 	GR += 1
-##	RRot += RRotY
-#	if GR >= GGR:
-##		RRotY = rand_range(-.1,.1)
-##		GGR += 10
-#		if GR >= 360:
-#			GR = 0
-#			GGR = 0
 	SpawnFloor.set_rotation_degrees(Vector3(-S,0,0))
 	add_child(SpawnFloor)
 	ContOnOb += 1
@@ -208,7 +201,7 @@ func _SpawnS():
 					if abs(-((Base.RX*90)+S)) >= 180 && abs(-((Base.RX*90)+S)) <= 270:
 						pass
 					else:
-						lasso = CR[randi()%1]
+						lasso = CR[1]#rand_range(0,1)]
 					SpawnCk = lasso.instance()
 					ContR = 0
 					SpawnCk.set_translation(Vector3(0,ObH,0))
@@ -222,16 +215,6 @@ func _SpawnS():
 					SpawnCk.set_translation(Vector3(0,ObH,0))
 					Ck = get_node(str(S,"/C")).get_child(0).get_node("CorkD")
 					Ck.add_child(SpawnCk)
-#					if ContPlat >= 4:
-#						for r in 3:
-#							SpawnPlat = Plat.instance()
-#							SpawnPlat.set_translation(Vector3(0,float(ObH+ObR),0))
-#							Ck = get_node(str(S,"/L/SpawnC/CorkM1/",randi()%3+1,"/")).get_child(r)
-#							Ck.add_child(SpawnPlat)
-#							if r == 3:
-#								SpawnPlat._Pw()
-#							ContPlat = 0
-#							ObR += 1
 			if CkRndCn <= 3:
 				SpawnCk.set_translation(Vector3(0,float(ObH),0))
 				Ck = get_node(str(S,"/C")).get_child(0).get_node("CorkD")
@@ -251,7 +234,7 @@ func _SpawnS():
 			if CkRndCn == 4:
 				ContR += 1
 				if ContR == 5:
-					lasso = CR[0]#randi()%1]
+					lasso = CR[1]#rand_range(0,1)]
 					if abs(-((Base.RX*90)+S)) >= 0 && abs(-((Base.RX*90)+S)) <= 270:
 						pass
 					else:
@@ -267,16 +250,6 @@ func _SpawnS():
 					SpawnCk.set_translation(Vector3(0,float(ObH),0))
 					Ck = get_node(str(S,"/C")).get_child(0).get_node("CorkI")
 					Ck.add_child(SpawnCk)
-#					if ContPlat >= 4:
-#						for r in 3:
-#							SpawnPlat = Plat.instance()
-#							SpawnPlat.set_translation(Vector3(0,float(ObH+ObR),0))
-#							Ck = get_node(str(S,"/L/SpawnC/CorkM2/",randi()%3+1,"/")).get_child(r)
-#							Ck.add_child(SpawnPlat)
-#							if r == 3:
-#								SpawnPlat._Pw()
-#							ContPlat = 0
-#							ObR += 1
 			if CkRndCn <= 3:
 				SpawnCk.set_translation(Vector3(0,float(ObH),0))
 				Ck = get_node(str(S,"/C")).get_child(0).get_node("CorkI")

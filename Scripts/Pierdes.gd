@@ -4,7 +4,7 @@ var Posi
 var PosiZ
 
 func _on_Area_body_entered(body):
-	if Base.Bas == "R" or Base.Bas == "H" or Base.Bas == "F":
+	if Base.Bas == "F":
 		if body.is_in_group("Asny"):
 			Base.W.get_node("FX")._set_playing(true)
 			Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
@@ -28,13 +28,20 @@ func _on_Area_body_entered(body):
 			if Base.Bas == "R" or Base.Bas == "H":
 				Base.BasNode._overG()
 				Base.BasNode._over()
-	if Base.Bas == "W":
+	if Base.Bas == "R" or Base.Bas == "H" or Base.Bas == "W":
 		if body.is_in_group("Asny"):
 			if Base.CW == 1:
-				PosiZ = Base.PosAsny
+				Base.CamPos.set_translation(Vector3(-3,20,0))
+				Base.CamPos.set_rotation_degrees(Vector3(-50,-90,0))
 				Base.BasNode = get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/BMW/BlueMoonW")
 				Base.BasNode._overG()
 				Base.BasNode._over()
+				Base.Vect = Vector3(0,0,Base.Ult)
+				Base._rot()
+				Base.PosAsny = Base.Ult
+				if Base.Ult == 0:
+					Base.PosPlayerAsny.set_translation(Vector3(0,50.75,0))
+					Base.Alt = 50.75
 				Base.CW = 0
 				Base.VW.hide()
 			Base.CW += 1

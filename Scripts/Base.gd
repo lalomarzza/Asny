@@ -56,7 +56,7 @@ var DN = -90
 onready var W = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/")
 var ry
 var ly
-
+onready var CamPos = get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial"))
 onready var CameraI = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/Camera")
 
 const StoreItems = "user://Store.dat"

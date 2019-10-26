@@ -22,8 +22,6 @@ func _process(delta):
 func _on_Area_body_entered(body):
 	if body.is_in_group("Detect"):
 		get_tree().call_group("Collider","Off")
-#		get_node(str("/root/Ctrl/VpCtrl/Vport/World/AsnyPlayer/")).set_translation(Vector3(3,-45,-20))
-#		set_unit_offset(.025)
 		Base.BasNode = self
 #		PosiO = get_node(Base.PsPlyRt).get_global_transform().origin
 #		get_node(Base.AsnyPress.get_path()).set_translation(PosiO)
@@ -39,22 +37,11 @@ func _on_Area_body_entered(body):
 		Base.VelZ = 4
 		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork")).hide()
 #		Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
-#		W.get_node("AsnyPlayer/ElAsny").set_traslation(Vector3(0,-1,0))
-#		Base.targetAsny.get_node("VR").set_traslation()
-##		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/DirectionalLight")).hide()
-#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor-1,"/C")).hide()
-#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor,"/C")).hide()
-#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor,"/M")).hide()
-#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor-1,"/M")).hide()
-#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor,"/O")).hide()
-#		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/",Base.CFloor-1,"/O")).hide()
-#		Base.AsnyPress.set_translation(Vector3(0,0,0))
-#		body.get_parent().set_translation(Vector3(0,.4,0))
-		get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-1,3.5,0))
+		Base.CamPos.set_translation(Vector3(-1.5,3.5,0))
+		Base.CamPos.set_rotation_degrees(Vector3(-25,-90,0))
 		if Base.Ctrl == "VR":
 			Base.VelG = -.075
 			Base.targetAsnyVR.set_translation(Vector3(2,1.5,0.05))
-#			get_node(str("/root/Ctrl/VBoxContainer/ViewportContainer2/Viewport2/Spatial/Camera")).set_translation(Vector3(0.2,0,0))
 
 func _over():
 	set_process(false)
@@ -67,7 +54,8 @@ func _overG():
 	Base._ChangeF()
 	get_node(Base.PosPlF).get_rotation_degrees()
 	Base.target = get_node(Base.PsPlyRt).get_parent()
-	get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial")).set_translation(Vector3(-3,20,0))
+	Base.CamPos.set_translation(Vector3(-3,20,0))
+	Base.CamPos.set_rotation_degrees(Vector3(-50,-90,0))
 	Base.VelG = 0.05
 	if Base.Ctrl == "VR":
 		Base.VelG = 0.01

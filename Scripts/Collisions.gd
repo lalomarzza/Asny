@@ -127,22 +127,22 @@ func _on_Game_body_entered(body):
 	get_node("/root/Ctrl/VBox/VpCtrl/MiniGameR").show()
 	if ID == "I":
 		Base.Vect = Vector3(0,0,.075)
-		Base.PosAsny = .075
 		Base._rot()
+		Base.PosAsny = .075
 	if ID == "D":
 		Base.Vect = Vector3(0,0,-.075)
-		Base.PosAsny = -.075
 		Base._rot()
+		Base.PosAsny = -.075
 
 func Detect():
 	Base.PosPlayerAsny.set_translation(Vector3(0,50.75,0))
 	Base.Alt = 50.75
 	Base.targetAsny2.get_node("AnimationPlayer").play("000")
-	if Base.Fn == false:
-		Base.Vect = Vector3(0,0,Base.Ult)
-		Base._rot()
-		Base.PosAsny = Base.Ult
-		Base.Fn = true
+#	if Base.Fn == false:
+#		Base.Vect = Vector3(0,0,Base.Ult)
+#		Base._rot()
+#		Base.PosAsny = Base.Ult
+#		Base.Fn = true
 
 
 func _on_Area_body_exited(body):
