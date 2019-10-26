@@ -1,12 +1,12 @@
 extends Spatial
 
-const Trees = [preload("res://Scenes/ObjectSingle/T1.scn"),
-preload("res://Scenes/ObjectSingle/T1.scn"),
-preload("res://Scenes/ObjectSingle/T1.scn"),
-preload("res://Scenes/ObjectSingle/Rock1.scn"),
-preload("res://Scenes/ObjectSingle/Rock2.scn"),
-preload("res://Scenes/ObjectSingle/Rock3.scn"),
-preload("res://Scenes/ObjectSingle/P1.scn")]
+const Trees = [preload("res://Scenes/ObjectSingle/N/T1.scn"),
+preload("res://Scenes/ObjectSingle/N/T1.scn"),
+preload("res://Scenes/ObjectSingle/N/T1.scn"),
+preload("res://Scenes/ObjectSingle/N/Rock1.scn"),
+preload("res://Scenes/ObjectSingle/N/Rock2.scn"),
+preload("res://Scenes/ObjectSingle/N/Rock3.scn"),
+preload("res://Scenes/ObjectSingle/N/P1.scn")]
 
 var R1 = 0
 var R2 = 0

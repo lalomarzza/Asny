@@ -216,10 +216,13 @@ func _CoinD():
 func _rot():
 	Base.target.set_rotation(Vect)
 
+onready var VW = get_node("/root/Ctrl/VBox/VpCtrl/W")
 var Player
+onready var Capture = Base.W.get_node("TextureRect/capture")
 
 func _readyPlayer():
 #	W.get_node("AsnyPlayer/ElAsny").set_mode(1)
+	Capture.get_parent().hide()
 	get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/TimerDiamond").start()
 	Cong = 0
 	if Bas == "F":

@@ -118,6 +118,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	Base.VelG = 1.25
 	Base.Bas = "W"
 	Base.VelZ = 0
+	Base.VW.show()
 
 func _on_Game_body_entered(body):
 	Base.Bas = "M"
@@ -126,12 +127,12 @@ func _on_Game_body_entered(body):
 	get_node("/root/Ctrl/VBox/VpCtrl/MiniGameR").show()
 	if ID == "I":
 		Base.Vect = Vector3(0,0,.075)
-		Base._rot()
 		Base.PosAsny = .075
+		Base._rot()
 	if ID == "D":
 		Base.Vect = Vector3(0,0,-.075)
-		Base._rot()
 		Base.PosAsny = -.075
+		Base._rot()
 
 func Detect():
 	Base.PosPlayerAsny.set_translation(Vector3(0,50.75,0))
