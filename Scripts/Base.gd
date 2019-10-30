@@ -149,6 +149,7 @@ func _process(delta):
 					if DN1 >= DN2:
 						DN2 += 360
 						DN3 += 360
+						prints(DN2,DN3)
 				else:
 					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").hide()
 					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").show()

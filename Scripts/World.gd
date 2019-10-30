@@ -195,13 +195,13 @@ func _SpawnS():
 			SpawnCk = CD.instance()
 			if CkRndCn == 4:
 				ContR += 1
-				if ContR == 5:
+				if ContR == 2:
 					lasso = CR[2]#randi()%2]
 					print(abs(-((Base.RX*90)+S)),"nnnnn")
-					if abs(-((Base.RX*90)+S)) >= 180 && abs(-((Base.RX*90)+S)) <= 270:
+					if abs(-((Base.RX*90)-360)) >= S && abs(-((Base.RX*90)-270)) <= S:
 						pass
 					else:
-						lasso = CR[1]#rand_range(0,1)]
+						lasso = CR[rand_range(0,1)]
 					SpawnCk = lasso.instance()
 					ContR = 0
 					SpawnCk.set_translation(Vector3(0,ObH,0))
@@ -233,9 +233,9 @@ func _SpawnS():
 			SpawnCk = CI.instance()
 			if CkRndCn == 4:
 				ContR += 1
-				if ContR == 5:
-					lasso = CR[1]#rand_range(0,1)]
-					if abs(-((Base.RX*90)+S)) >= 0 && abs(-((Base.RX*90)+S)) <= 270:
+				if ContR == 2:
+					lasso = CR[rand_range(0,1)]
+					if abs(-((Base.RX*90)-360)) >= S && abs(-((Base.RX*90)-270)) <= S:
 						pass
 					else:
 						lasso = CR[2]
@@ -284,7 +284,7 @@ func _SpawnS():
 				ContH += 1
 				ContPlat += 1
 				RandRP = randi()%3+0
-				if ContH == 2:
+				if ContH == 1:
 					CkRnd = 3
 					BoolM = true
 					ContH = 0
@@ -295,7 +295,7 @@ func _SpawnS():
 				ContH += 1
 				ContPlat += 1
 				RandRP = randi()%3+0
-				if ContH == 2:
+				if ContH == 1:
 					CkRnd = 3
 					BoolM = true
 					ContH = 0

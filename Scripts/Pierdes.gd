@@ -39,9 +39,9 @@ func _on_Area_body_entered(body):
 				Base.Vect = Vector3(0,0,Base.Ult)
 				Base._rot()
 				Base.PosAsny = Base.Ult
-				if Base.Ult == 0:
-					Base.PosPlayerAsny.set_translation(Vector3(0,50.75,0))
-					Base.Alt = 50.75
+#				if Base.Ult == 0:
+				Base.PosPlayerAsny.set_translation(Vector3(0,50.75,0))
+				Base.Alt = 50.75
 				Base.CW = 0
 				Base.VW.hide()
 			Base.CW += 1
