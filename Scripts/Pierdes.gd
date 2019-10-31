@@ -36,12 +36,12 @@ func _on_Area_body_entered(body):
 				Base.BasNode = get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/BMW/BlueMoonW")
 				Base.BasNode._overG()
 				Base.BasNode._over()
-				Base.Vect = Vector3(0,0,Base.Ult)
+				Base.Vect = Vector3(0,0,0)
 				Base._rot()
-				Base.PosAsny = Base.Ult
+				Base.PosAsny = 0
 #				if Base.Ult == 0:
-				Base.PosPlayerAsny.set_translation(Vector3(0,50.75,0))
-				Base.Alt = 50.75
+				Base.PosPlayerAsny.set_translation(Vector3(0,50,0))
+				Base.Alt = 50
 				Base.CW = 0
 				Base.VW.hide()
 			Base.CW += 1

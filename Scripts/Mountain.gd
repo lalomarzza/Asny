@@ -11,6 +11,7 @@ var CnTr = 1
 
 func _enter_tree():
 	randomize()
+	$Cshn.set_rotation_degrees(Vector3(0,randi()%365,0))
 	for i in 2:
 		if i + 1 == 4:
 			CnMn = 2

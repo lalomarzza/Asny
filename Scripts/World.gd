@@ -197,8 +197,8 @@ func _SpawnS():
 				ContR += 1
 				if ContR == 2:
 					lasso = CR[2]#randi()%2]
-					print(abs(-((Base.RX*90)+S)),"nnnnn")
-					if abs(-((Base.RX*90)-360)) >= S && abs(-((Base.RX*90)-270)) <= S:
+					print(abs(-((Base.RX*90)-360)),"nnnnn")
+					if S >= abs(-((Base.RX*90)-360)) && S <= abs(-((Base.RX*90)-270)):
 						pass
 					else:
 						lasso = CR[rand_range(0,1)]

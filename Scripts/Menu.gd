@@ -1,7 +1,7 @@
 extends TextureRect
 
 var AsnyReady = preload("res://Scenes/AsnyPlayer.scn")
-var AsnyHat = preload("res://Scenes/ObjectSingle/Store/Hat.scn")
+var AsnySt = [preload("res://Scenes/ObjectSingle/Store/Hat.scn")]
 var Music = true
 var Sound = true
 var Hat = true
@@ -76,6 +76,7 @@ func _on_Store_pressed():
 	print(str(Base.W.get_child(1).get_path()))
 	get_node("Control1").hide()
 	get_node("Control2").show()
+	Base.W.get_node("TextureRect").hide()
 	if Base.Store["Hat"] == false:
 		Menu.set_normal_texture(preload("res://Images/BublePressed.png"))
 		Menu.get_child(0).hide()
@@ -88,6 +89,7 @@ func _on_Store_pressed():
 func _on_StoreR_pressed():
 	get_node("Control2").hide()
 	get_node("Control1").show()
+	Base.W.get_node("TextureRect").show()
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(Base.AsnyPress)
 	ResourceSaver.save("res://Scenes/AsnyPlayer.scn", packed_scene)
@@ -96,7 +98,6 @@ func _on_StoreR_pressed():
 
 func _on_TimerDiamond_timeout():
 	get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").hide()
-	pass # Replace with function body.
 
 func _Hat():
 	var Menu = get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/Control2/Hat")
@@ -107,9 +108,9 @@ func _Hat():
 		Menu.get_child(0).hide()
 		Menu.get_child(1).show()
 		Base.Store["Hat"] = false
-		AsnyPressHat = AsnyHat.instance()
+		AsnyPressHat = AsnySt[0].instance()
 		print(get_node(str(Base.StoreP.get_child(0).get_path())))
-		get_node(str(Base.StoreP.get_path())+"/Asny!ExportD/Esqueleto2").add_child(AsnyPressHat)
+		get_node(str(Base.StoreP.get_path())+"/Asny!ExportD/Esqueleto/Skeleton").add_child(AsnyPressHat)
 		AsnyPressHat.set_owner(Base.AsnyPress)
 		Base.Store["HatB"] = 1
 #		Base.AsnyPress.set_translation(Vector3(0,55,0))
@@ -118,7 +119,7 @@ func _Hat():
 		Menu.get_child(0).show()
 		Menu.get_child(1).hide()
 		Base.Store["Hat"] = true
-		get_node(str(Base.StoreP.get_child(1).get_path())+"/Esqueleto2/Cylinder").free()
+		get_node(str(Base.StoreP.get_child(1).get_path())+"/Esqueleto/Skeleton/Hat").free()
 		Base.Store["HatB"] = 0
 
 func _on_Hat_button_up():
