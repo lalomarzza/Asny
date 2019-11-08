@@ -47,6 +47,6 @@ func _on_Area_body_entered(body):
 			Base.CW += 1
 
 func _quit():
-	get_parent().free()
+	get_parent().hide()
 	Base.AsnyPress.get_parent().remove_child(Base.AsnyPress)
 	Base.StoreP.add_child(Base.AsnyPress)
