@@ -10,6 +10,11 @@ var Strt = false
 
 var TF = false
 
+var RotY
+
+var ly
+var ry
+
 func _ready():
 	Base.CameraI.set_interpolation_enabled(false)
 	Base.VRF = self
@@ -25,7 +30,7 @@ func _process(delta):
 	#		Cont += 1
 	#		Vect = Vector3(0,0,Input.get_accelerometer().z)
 	#		Base.target.set_rotation(Vect)
-			if Input.get_accelerometer().x <= -1:
+			if Input.get_accelerometer().x <= -1 or Input.is_action_pressed("ui_left"):
 				Base.PosAsny = Base.PosAsny + Base.VelG
 				if Base.Bas == "F":
 					if Base.PosAsny >= 0.1:
@@ -37,7 +42,7 @@ func _process(delta):
 					Base.targetAsny2.get_node("AnimationPlayer").play("Derecha")
 				if Base.Bas == "H":
 					Vect = Vector3(0,Base.PosAsny,0)
-			if Input.get_accelerometer().x >= 1:
+			if Input.get_accelerometer().x >= 1 or Input.is_action_pressed("ui_right"):
 				Base.PosAsny = Base.PosAsny - Base.VelG
 				if Base.Bas == "F":
 					if Base.PosAsny <= -0.1:
@@ -55,7 +60,7 @@ func _process(delta):
 				if Input.get_accelerometer().x <= 0:
 					TF = true
 			else:
-				if Input.get_accelerometer().z <= -2 || Input.is_action_just_pressed("ui_cancel"):
+				if Input.get_accelerometer().x <= -4 || Input.is_action_just_pressed("ui_cancel"):
 					Base.CameraI.set_interpolation_enabled(true)
 #					Base.VRF = self
 					OS.set_screen_orientation(1)
@@ -70,3 +75,4 @@ func _return():
 	get_node("/root/Ctrl/VBox/VpCtrl/Control/VR/").hide()
 	Base.CtrlTrue.queue_free()
 	Base.Ctrl = "PL"
+	Base.Capture.get_parent().show()

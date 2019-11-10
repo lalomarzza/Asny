@@ -18,16 +18,16 @@ func _on_Area_body_entered(body):
 			Base.StoreP.set_global_transform(Base.CameraI.get_node("StoreAsny").get_global_transform())
 			call_deferred("_quit")
 			Base.StoreP.get_node("Bubble").set_emitting(true)
-			if Base.Ctrl == "VR":
-				Base.VRF.Strt = false
-				get_tree().call_group("Node2D","show")
-				Base.CameraI.set_process(false)
 			if Base.Ctrl == "PL":
 				Base.AsnyCtrl.show()
 				Base.CtrlTrue.free()
 			if Base.Bas == "R" or Base.Bas == "H":
 				Base.BasNode._overG()
 				Base.BasNode._over()
+			if Base.Ctrl == "VR":
+				Base.VRF.Strt = false
+				get_tree().call_group("Node2D","show")
+				Base.CameraI.set_process(false)
 	if Base.Bas == "R" or Base.Bas == "H" or Base.Bas == "W":
 		if body.is_in_group("Asny"):
 			if Base.CW == 1:
@@ -41,12 +41,17 @@ func _on_Area_body_entered(body):
 				Base.PosAsny = 0
 #				if Base.Ult == 0:
 				Base.PosPlayerAsny.set_translation(Vector3(0,50,0))
+#				if Base.Bas == "W":
+#					Base.PosPlayer.set_translation(Vector3(0,50,0))
 				Base.Alt = 50
 				Base.CW = 0
 				Base.VW.hide()
 			Base.CW += 1
 
 func _quit():
-	get_parent().hide()
+	get_parent().free()
 	Base.AsnyPress.get_parent().remove_child(Base.AsnyPress)
 	Base.StoreP.add_child(Base.AsnyPress)
+	if Base.Ctrl == "VR":
+		Base.Capture.get_parent().hide()
+#		print(Base.Ctrl)

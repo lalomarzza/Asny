@@ -91,7 +91,7 @@ func _ready():
 		_VR()
 	Sv()
 	SvSt()
-	print("384*216")
+#	print("384*216")
 #	get_node("/root/Ctrl/VBox/VpCtrl/Vport/").set_size(Vector2(216,384))
 #	Res = int(Base.data["Rest"])
 #	ReloadS()
@@ -149,7 +149,7 @@ func _process(delta):
 					if DN1 >= DN2:
 						DN2 += 360
 						DN3 += 360
-						prints(DN2,DN3)
+#						prints(DN2,DN3)
 				else:
 					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight").hide()
 					get_node("/root/Ctrl/VBox/VpCtrl/Vport/TerrainCork/DirectionalLight2").show()
@@ -259,13 +259,19 @@ var CW = 0
 var CtrlTrue
 
 func _VR():
+	Capture.get_parent().hide()
 	get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/").hide()
 	get_node("/root/Ctrl/VBox/VpCtrl/Control/VR/").show()
 	CtrlTrue = ControlAsnyVR.instance()
+#	Base.VR.get_node("Label").set_text(str(ContC))
 	get_node("/root/Ctrl/VBox/").add_child(CtrlTrue)
+	Base.VR.get_node("Node2D").show()
 	Ctrl = "VR"
 
 func _readyPlayerVR():
+	Capture.get_parent().hide()
+	Base.VR.get_node("Label").set_text(str(0))
+	Base.VR.get_node("Node2D").hide()
 	Cong = 0
 	if Bas == "F":
 		VelG = .005

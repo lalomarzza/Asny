@@ -121,10 +121,13 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	Base.VW.show()
 
 func _on_Game_body_entered(body):
-	Base.Bas = "M"
-	Base.VelZ = 3
-	get_node("/root/Ctrl/VBox/VpCtrl/MiniGameR")._Game()
-	get_node("/root/Ctrl/VBox/VpCtrl/MiniGameR").show()
+	if Base.Ctrl == "VR":
+		Base.Acc = true
+	else:
+		Base.Bas = "M"
+		Base.VelZ = 3
+		get_node("/root/Ctrl/VBox/VpCtrl/MiniGameR")._Game()
+		get_node("/root/Ctrl/VBox/VpCtrl/MiniGameR").show()
 	if ID == "I":
 		Base.Vect = Vector3(0,0,.075)
 		Base._rot()

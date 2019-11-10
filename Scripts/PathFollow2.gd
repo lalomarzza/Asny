@@ -41,7 +41,6 @@ func _on_Area_body_entered(body):
 		Base.CamPos.set_rotation_degrees(Vector3(-25,-90,0))
 		if Base.Ctrl == "VR":
 			Base.VelG = -.075
-			Base.targetAsnyVR.set_translation(Vector3(2,1.5,0.05))
 
 func _over():
 	set_process(false)

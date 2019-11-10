@@ -68,8 +68,14 @@ func _ready():
 			if BlOb == true:
 				ContOnOb += CnOb
 				get_child(S)._obs()
+#	print(mvo[58][0])
+#	print(mvo)
+	_mov()
+#	print(mv.get_path())
 
 var M = 0
+var mv  = {}
 
 func _mov():
 	M += 1
+	mv = get_node(str(mvm[M][0],"/",mvm[M][1],"/")).set_translation(get_translation()+Vector3(0,5,0))

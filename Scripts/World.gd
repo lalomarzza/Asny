@@ -191,7 +191,7 @@ func _SpawnS():
 	if ContCk == ContCkPos:
 		CkRndCn += 1
 		if CkRnd == 1:
-			print(abs(-((Base.RX*90)+S)),"n")
+#			print(abs(-((Base.RX*90)+S)),"n")
 			SpawnCk = CD.instance()
 			if CkRndCn == 4:
 				ContR += 1
@@ -201,14 +201,14 @@ func _SpawnS():
 					if S >= abs(-((Base.RX*90)-360)) && S <= abs(-((Base.RX*90)-270)):
 						pass
 					else:
-						lasso = CR[rand_range(0,1)]
+						lasso = CR[round(rand_range(0,2))]
 					SpawnCk = lasso.instance()
 					ContR = 0
 					SpawnCk.set_translation(Vector3(0,ObH,0))
 					Ck = get_node(str(S,"/L")).get_child(0).get_node("CorkD")
 					Ck.add_child(SpawnCk)
 					DicMv[S] = str(abs(S))
-					print(DicMv[S])
+#					print(DicMv[S])
 				else:
 					SpawnCk = CH.instance()
 					SpawnCk.set_name(str(S,"C"))
@@ -234,7 +234,7 @@ func _SpawnS():
 			if CkRndCn == 4:
 				ContR += 1
 				if ContR == 2:
-					lasso = CR[rand_range(0,1)]
+					lasso = CR[round(rand_range(0,2))]
 					if abs(-((Base.RX*90)-360)) >= S && abs(-((Base.RX*90)-270)) <= S:
 						pass
 					else:
@@ -314,7 +314,7 @@ func _SpawnS():
 				Mn1.add_child(SpawnMn1)
 				ContMnPos += 12
 				BoolO = true
-			CntR = 0
+			CntR 
 		else:
 			if ContMn == ContMnPos:
 				Mn1 = get_node(str(S,"/M")).get_child(0).get_node("Mntn")
@@ -394,13 +394,16 @@ func _Mov():
 	ObMv += 1
 
 func _Screen():
-	get_viewport().set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
-	var img = get_viewport().get_texture().get_data()
-	img.flip_y()
-	var tex = ImageTexture.new()
-	tex.create_from_image(img)
-	Base.Capture.set_texture(tex)
-	Base.Capture.set_scale(Vector2(.4,.4))
-	Base.Capture.get_parent().show()
+	if Base.Ctrl == "VR":
+		pass
+	else:
+		get_viewport().set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
+		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
+		var img = get_viewport().get_texture().get_data()
+		img.flip_y()
+		var tex = ImageTexture.new()
+		tex.create_from_image(img)
+		Base.Capture.set_texture(tex)
+		Base.Capture.set_scale(Vector2(.4,.4))
+		Base.Capture.get_parent().show()

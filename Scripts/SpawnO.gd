@@ -29,7 +29,7 @@ func _obs():
 	SpawnOb = Obbs.instance()
 	SpawnOb.set_rotation_degrees(Vector3(0,randi()%365,0))
 	get_node(str(RObs)).add_child(SpawnOb)
-	get_parent().mvo[str(get_parent().s,"0",get_parent().CtO)] = RObs
+	get_parent().mvo[get_parent().CtO] = [get_parent().s,RObs]
 	get_parent().CtO += 1
 
 var ObMn
@@ -40,9 +40,7 @@ func _mns():
 	ObMn = Mns[randi()%Mns.size()]
 	SpawnMn = ObMn.instance()
 	get_node(str(RMns)).add_child(SpawnMn)
-	get_parent().mvm[str(get_parent().s,get_parent().CtM)] = [RMns,"1",get_parent().s,get_parent().CtM]
-	get_parent().ent = int(get_parent().mvm[str(get_parent().s,get_parent().CtM)])
-	print(get_parent().ent)
+	get_parent().mvm[get_parent().CtM] = [RMns,"1",get_parent().s,get_parent().CtM]
 	get_parent().CtM += 1
 
 var ObMt
