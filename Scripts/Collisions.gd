@@ -2,6 +2,9 @@ extends Spatial
 
 var ID
 
+func _ready():
+	Base.NodeColl = self
+
 func _on_Area_body_entered(body):
 	if body.is_in_group("Detect"):
 #		if ID == "I":

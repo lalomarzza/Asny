@@ -22,7 +22,7 @@ var mvt = {}
 
 var Cn = 0
 var CtO = 0
-var CtM = 0
+var CtM = 15
 var CtT = 0
 
 var s
@@ -42,8 +42,8 @@ func _ready():
 				CnMt += 1
 				if CnMt == 5:
 					get_child(S).BlMtOn = false
-				get_child(S)._mnt()
-				get_child(S).BlMtOn = true
+					get_child(S)._mnt()
+					get_child(S).BlMtOn = true
 				if CnMt == 3:
 					BlOb = false
 					BlMn = false
@@ -58,7 +58,9 @@ func _ready():
 			BlOb = false
 			if ContOnObMn == 8:
 				if BlMn == true:
-					get_child(S)._mns()
+#					print(get_child(S).get_path())
+#					get_child(S)._mns()
+					pass
 			if ContOnObMn >= 15:
 				BlOb = true
 				ContOnObMn = 0
@@ -70,12 +72,15 @@ func _ready():
 				get_child(S)._obs()
 #	print(mvo[58][0])
 #	print(mvo)
-	_mov()
+#	_mov()
 #	print(mv.get_path())
 
 var M = 0
-var mv  = {}
+var mv
 
 func _mov():
 	M += 1
-	mv = get_node(str(mvm[M][0],"/",mvm[M][1],"/")).set_translation(get_translation()+Vector3(0,5,0))
+	mv.get_node(str(mvm[M][0],"/",mvm[M][1],"/")).get_child(0)
+	get_node(str(mvm[M][0],"/",mvm[M][1],"/")).remove_child(mv)
+	mvm[M][0] += 180
+	get_node(str(mvm[M][0],"/",mvm[M][1],"/")).add_child(mv)

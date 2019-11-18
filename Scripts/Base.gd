@@ -58,6 +58,13 @@ var ry
 var ly
 onready var CamPos = get_node(str("/root/Ctrl/VBox/VpCtrl/Vport/World/AsnyPlayer/Spatial"))
 onready var CameraI = get_node("/root/Ctrl/VBox/VpCtrl/Vport/World/Camera")
+var Btn
+var Control1
+var Control2
+var Menu
+var Price
+
+var NodeColl
 
 const StoreItems = "user://Store.dat"
 const passwordSt = "4321"
@@ -89,6 +96,7 @@ func _ready():
 		_readyPlayer()
 	if get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/Control1/Button4").connect("pressed",self,"_VR"):
 		_VR()
+#	Store_Dicc()
 	Sv()
 	SvSt()
 #	print("384*216")
@@ -103,6 +111,18 @@ func Sv():
 	else:
 		save_data()
 		load_data()
+ 
+#var StoreD = {}
+
+func Store_Dicc():
+	for i in 5:
+		for s in 3:
+			if s <= 0:
+				Store[i] = str([0])
+			else:
+				Store[i] = str(Store[i],0)
+	print(Store)
+	print(Store[1][3])
 
 func SvSt():
 	var file = File.new()
@@ -219,7 +239,7 @@ func _rot():
 
 onready var VW = get_node("/root/Ctrl/VBox/VpCtrl/W")
 var Player
-onready var Capture = Base.W.get_node("TextureRect/capture")
+onready var Capture = get_node("/root/Ctrl/VBox/VpCtrl/Control/TextureRect/capture")
 
 func _readyPlayer():
 #	W.get_node("AsnyPlayer/ElAsny").set_mode(1)
@@ -320,10 +340,10 @@ func _musicAsnyStop():
 var CtrlH
 
 func _Store():
-	CtrlH = get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/Control2/Hat")
-	if Store["HatB"] == 0:
-		CtrlH.get_child(0).show()
-		CtrlH.get_child(1).hide()
-	if Store["HatB"] == 1:
-		CtrlH.get_child(0).hide()
-		CtrlH.get_child(1).show()
+	CtrlH = get_node("/root/Ctrl/VBox/VpCtrl/Control/Menu/Control2/1/Button")
+#	if Store["HatB"] == 0:
+#		CtrlH.get_child(0).show()
+#		CtrlH.get_child(1).hide()
+#	if Store["HatB"] == 1:
+#		CtrlH.get_child(0).hide()
+#		CtrlH.get_child(1).show()

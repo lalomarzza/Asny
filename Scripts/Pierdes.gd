@@ -10,7 +10,7 @@ func _on_Area_body_entered(body):
 			Base.W.get_node("AsnyPlayer/ElAsny").set_mode(1)
 			Base.press = false
 			Base.ContF1 += 5
-			Base.W._Screen()
+			_Screen()
 			Base.W.get_node("AsnyPlayer/CPUParticles").set_emitting(true)
 			Base._musicAsnyStop()
 			get_node("/root/Ctrl/VBox/VpCtrl/Control/Score/Diamond").set_text(str(Base.data["Diamond"]))
@@ -46,7 +46,23 @@ func _on_Area_body_entered(body):
 				Base.Alt = 50
 				Base.CW = 0
 				Base.VW.hide()
+				Base.NodeColl._Down()
 			Base.CW += 1
+
+func _Screen():
+	if Base.Ctrl == "VR":
+		pass
+	else:
+		Base.W.get_viewport().set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
+		yield(Base.W.get_tree(), "idle_frame")
+		yield(Base.W.get_tree(), "idle_frame")
+		var img = get_viewport().get_texture().get_data()
+		img.flip_y()
+		var tex = ImageTexture.new()
+		tex.create_from_image(img)
+		Base.Capture.set_texture(tex)
+		Base.Capture.set_scale(Vector2(.4,.4))
+		Base.Capture.get_parent().show()
 
 func _quit():
 	get_parent().free()

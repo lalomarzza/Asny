@@ -15,6 +15,8 @@ var Rv = preload("res://Scenes/ObjectSingle/N/CorkRiver.scn")
 var RObs = 0
 var RMns = 0
 
+var RPos = 0
+
 func _ready():
 	randomize()
 	RObs = round(rand_range(5,7))
@@ -24,6 +26,7 @@ var Obbs
 var SpawnOb
 
 func _obs():
+	RPos = 2
 	RObs = round(rand_range(1,5))
 	Obbs = Obs[randi()%Obs.size()]
 	SpawnOb = Obbs.instance()
@@ -36,6 +39,7 @@ var ObMn
 var SpawnMn
 
 func _mns():
+	RPos = 1
 	RMns = round(rand_range(5,7))
 	ObMn = Mns[randi()%Mns.size()]
 	SpawnMn = ObMn.instance()
@@ -48,6 +52,7 @@ var SpawnMt
 var BlMtOn = true
 
 func _mnt():
+	RPos = 0
 	if BlMtOn == true:
 		for i in 2:
 			ObMt = Mnt[i]

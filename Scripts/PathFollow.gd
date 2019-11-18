@@ -32,7 +32,7 @@ func _overG():
 	Base.PosAsny = PosiZ
 	Base.VelZ = 9
 	set_process(false)
-	Base.VelR = 5
+	Base.VelR = .5
 
 var Bod
 
